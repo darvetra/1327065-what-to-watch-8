@@ -1,5 +1,5 @@
-import MovieCard from '../movie-card/movie-card';
 import {MoviesType} from '../../types/movie';
+import MovieList from '../movie-list/movie-list';
 
 type MovieListProps = {
   movies: MoviesType;
@@ -104,11 +104,7 @@ function MainScreen({movies}: MovieListProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-
-            {movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
-
-          </div>
+          <MovieList movies={movies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
