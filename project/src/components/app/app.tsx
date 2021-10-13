@@ -1,13 +1,14 @@
 import MainScreen from '../main/main';
-import {MoviesType} from '../../types/movie';
+import {MoviesType, MovieType} from '../../types/movie';
 
 type AppScreenProps = {
+  promoMovie: MovieType;
   movies: MoviesType;
 }
 
-function App({movies}: AppScreenProps): JSX.Element {
+function App({promoMovie, movies}: AppScreenProps): JSX.Element {
   return (
-    <MainScreen movies={movies} />
+    <MainScreen promoMovie={promoMovie} movies={movies} />
   );
 }
 
