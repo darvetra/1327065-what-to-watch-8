@@ -1,4 +1,4 @@
-function LoginScreen(): JSX.Element {
+function MyListScreen(): JSX.Element {
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -91,4 +91,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default MyListScreen;
