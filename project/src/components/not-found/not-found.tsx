@@ -1,8 +1,10 @@
+import {Link} from 'react-router-dom';
+
 function NotFoundScreen(): JSX.Element {
   return (
     <>
-      <p>404 Not Found</p>
-      <a href="#">Main Page</a>
+      <h3>404 Not Found</h3>
+      <Link to="/">go to Main Page</Link>
     </>
   );
 }
