@@ -18,7 +18,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 3,
@@ -56,7 +56,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 5,
@@ -94,7 +94,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 6,
@@ -113,7 +113,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 7,
@@ -132,7 +132,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 8,
@@ -151,7 +151,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 9,
@@ -170,7 +170,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 10,
@@ -189,7 +189,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 11,
@@ -208,7 +208,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 12,
@@ -227,7 +227,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 13,
@@ -246,7 +246,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 14,
@@ -265,7 +265,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 15,
@@ -284,7 +284,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 16,
@@ -303,7 +303,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 17,
@@ -322,7 +322,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 18,
@@ -341,7 +341,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: false,
   },
   {
     id: 19,
@@ -360,7 +360,7 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
   {
     id: 20,
@@ -379,6 +379,6 @@ export const moviesList : MoviesType = [
     // runTime: ,
     // genre: ,
     // released: ,
-    // isFavorite: ,
+    isFavorite: true,
   },
 ];
