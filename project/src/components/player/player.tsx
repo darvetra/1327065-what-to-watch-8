@@ -4,7 +4,7 @@ function Player(props: {movie: MovieType}): JSX.Element {
 
   return (
     <div className="player">
-      <video src="#" className="player__video" poster={props.movie.previewImage} />
+      <video src="#" className="player__video" poster={props.movie.previewVideoLink} />
 
       <button type="button" className="player__exit">Exit</button>
 
