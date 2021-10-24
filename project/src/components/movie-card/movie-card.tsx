@@ -1,5 +1,6 @@
 import {MovieType} from '../../types/movie';
 import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 function MovieCard(props: {movie: MovieType}): JSX.Element {
 
@@ -25,7 +26,7 @@ function MovieCard(props: {movie: MovieType}): JSX.Element {
         <img src={props.movie.previewImage} alt={props.movie.name} width="280" height="175"/>
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{props.movie.name}</a>
+        <Link className="small-film-card__link" to={`/films/${props.movie.id}`}>{props.movie.name}</Link>
       </h3>
     </article>
   );
