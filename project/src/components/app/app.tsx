@@ -14,9 +14,10 @@ import PrivateRoute from '../private-route/private-route';
 type AppScreenProps = {
   promoMovie: MovieType,
   movies: MoviesType,
+  movie: MovieType,
 }
 
-function App({promoMovie, movies}: AppScreenProps): JSX.Element {
+function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -40,7 +41,7 @@ function App({promoMovie, movies}: AppScreenProps): JSX.Element {
           <AddReview />
         </Route>
         <Route exact path={AppRoute.Player}>
-          <Player />
+          <Player movie={movie} />
         </Route>
         <Route>
           <NotFoundScreen />
