@@ -12,8 +12,8 @@ import NotFoundScreen from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
-  promoMovie: MovieType;
-  movies: MoviesType;
+  promoMovie: MovieType,
+  movies: MoviesType,
 }
 
 function App({promoMovie, movies}: AppScreenProps): JSX.Element {

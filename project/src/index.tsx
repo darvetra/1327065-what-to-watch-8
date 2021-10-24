@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
 import {promoMovie} from './mocks/promo';
-import {moviesList} from './mocks/movie';
+import {moviesList} from './mocks/films';
 
 ReactDOM.render(
   <React.StrictMode>
