@@ -12,11 +12,12 @@ import NotFoundScreen from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
-  promoMovie: MovieType;
-  movies: MoviesType;
+  promoMovie: MovieType,
+  movies: MoviesType,
+  movie: MovieType,
 }
 
-function App({promoMovie, movies}: AppScreenProps): JSX.Element {
+function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -29,7 +30,7 @@ function App({promoMovie, movies}: AppScreenProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.MyList}
-          render={() => <MyListScreen />}
+          render={() => <MyListScreen movies={movies} />}
           authorizationStatus={AuthorizationStatus.NoAuth}
         >
         </PrivateRoute>
@@ -37,10 +38,10 @@ function App({promoMovie, movies}: AppScreenProps): JSX.Element {
           <MoviePageScreen />
         </Route>
         <Route exact path={AppRoute.AddReview}>
-          <AddReview />
+          <AddReview movie={movie} />
         </Route>
         <Route exact path={AppRoute.Player}>
-          <Player />
+          <Player movie={movie} />
         </Route>
         <Route>
           <NotFoundScreen />
