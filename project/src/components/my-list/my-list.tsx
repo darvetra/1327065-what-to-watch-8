@@ -1,5 +1,5 @@
 import {MoviesType} from '../../types/movie';
-import MovieCard from '../movie-card/movie-card';
+import MovieCover from '../movie-cover/movie-cover';
 
 type MyListProps = {
   movies: MoviesType;
@@ -38,7 +38,7 @@ function MyListScreen({movies}: MyListProps): JSX.Element {
 
           {movies
             .filter((movie) => movie.isFavorite === true)
-            .map((movie) => <MovieCard movie={movie} key={movie.id} />)}
+            .map((movie) => <MovieCover movie={movie} key={movie.id} />)}
 
         </div>
       </section>

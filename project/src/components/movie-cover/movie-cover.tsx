@@ -2,16 +2,16 @@ import {MovieType} from '../../types/movie';
 import {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
-function MovieCard(props: {movie: MovieType}): JSX.Element {
+function MovieCover(props: {movie: MovieType}): JSX.Element {
 
-  const [movieCardHover, setMovieCardHover] = useState(false);
+  const [isHovered, setHovered] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    if(movieCardHover) {
+    if(isHovered) {
 
-      // До момента реализации воспроизведения видео по наведению на карточку фильма, иначе просто movieCardHover нигде не используется, что странно
+      // До момента реализации воспроизведения видео по наведению на карточку фильма, иначе просто isHovered нигде не используется, что странно
 
       /* eslint-disable no-alert, no-console */
       console.log('работает');
@@ -21,8 +21,8 @@ function MovieCard(props: {movie: MovieType}): JSX.Element {
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => setMovieCardHover(true)}
-      onMouseLeave={() => setMovieCardHover(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       onClick={() => history.push(`/films/${props.movie.id}`)}
     >
       <div className="small-film-card__image">
@@ -35,4 +35,4 @@ function MovieCard(props: {movie: MovieType}): JSX.Element {
   );
 }
 
-export default MovieCard;
+export default MovieCover;
