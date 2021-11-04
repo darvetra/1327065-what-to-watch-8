@@ -2,12 +2,12 @@ import {MovieType} from '../types/movie';
 
 export const promoMovie : MovieType = {
   id: 21,
-  name: 'The Grand Budapest Hotel',
+  name: 'The Grand Budapest Hotel - 1',
   posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
   // previewImage: string,
   backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
   // backgroundColor: ,
-  // videoLink: ,
+  videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   previewVideoLink: 'img/bg-the-grand-budapest-hotel.jpg',
   // description: ,
   // rating: ,

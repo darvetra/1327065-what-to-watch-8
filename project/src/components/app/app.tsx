@@ -7,7 +7,7 @@ import LoginScreen from '../login/login';
 import MyListScreen from '../my-list/my-list';
 import MoviePageScreen from '../movie-page/movie-page';
 import AddReview from '../add-review/add-review';
-import Player from '../player/player';
+import VideoPlayer from '../video-player/video-player';
 import NotFoundScreen from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
@@ -15,6 +15,7 @@ type AppScreenProps = {
   promoMovie: MovieType,
   movies: MoviesType,
   movie: MovieType,
+  // autoPlay: boolean,
 }
 
 function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
@@ -41,7 +42,7 @@ function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
           <AddReview movie={movie} />
         </Route>
         <Route exact path={AppRoute.Player}>
-          <Player movie={movie} />
+          <VideoPlayer movie={movie} autoPlay />
         </Route>
         <Route>
           <NotFoundScreen />
