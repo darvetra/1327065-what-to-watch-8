@@ -48,6 +48,7 @@ function VideoPlayer({movie, autoPlay}: VideoPlayerProps): JSX.Element {
         src={movie.videoLink}
         className="player__video"
         poster={movie.previewVideoLink}
+        ref={videoRef}
         autoPlay
         // mute
       />

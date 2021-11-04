@@ -2,7 +2,7 @@ import {MovieType} from '../types/movie';
 
 export const promoMovie : MovieType = {
   id: 21,
-  name: 'The Grand Budapest Hotel - 1',
+  name: 'The Grand Budapest Hotel',
   posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
   // previewImage: string,
   backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
