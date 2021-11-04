@@ -15,7 +15,6 @@ type AppScreenProps = {
   promoMovie: MovieType,
   movies: MoviesType,
   movie: MovieType,
-  // autoPlay: boolean,
 }
 
 function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
@@ -42,7 +41,7 @@ function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
           <AddReview movie={movie} />
         </Route>
         <Route exact path={AppRoute.Player}>
-          <VideoPlayer movie={movie} autoPlay />
+          <VideoPlayer movie={movie} autoPlay muted />
         </Route>
         <Route>
           <NotFoundScreen />

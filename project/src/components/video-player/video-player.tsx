@@ -4,11 +4,10 @@ import {useState, useEffect, useRef} from 'react';
 type VideoPlayerProps = {
   movie: MovieType;
   autoPlay: boolean;
-  // mute: boolean;
-  // src: string;
+  muted: boolean;
 }
 
-function VideoPlayer({movie, autoPlay}: VideoPlayerProps): JSX.Element {
+function VideoPlayer({movie, autoPlay, muted}: VideoPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
 
@@ -25,7 +24,6 @@ function VideoPlayer({movie, autoPlay}: VideoPlayerProps): JSX.Element {
         videoRef.current = null;
       }
     };
-  // }, [src]);
   }, []);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ function VideoPlayer({movie, autoPlay}: VideoPlayerProps): JSX.Element {
     }
 
     videoRef.current.pause();
-  // }, [isPlaying]);
   }, [isPlaying]);
 
   return (
@@ -49,8 +46,7 @@ function VideoPlayer({movie, autoPlay}: VideoPlayerProps): JSX.Element {
         className="player__video"
         poster={movie.previewVideoLink}
         ref={videoRef}
-        autoPlay
-        // mute
+        muted={muted}
       />
 
       <button type="button" className="player__exit">Exit</button>
