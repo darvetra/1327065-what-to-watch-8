@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
 import MovieCover from '../movie-cover/movie-cover';
-import VideoPlayer from '../video-player/video-player';
+import VideoPlayback from '../video-playback/video-playback';
 
 type MovieCardProps = {
   movie: MovieType;
@@ -34,7 +34,7 @@ function MovieCard({movie}: MovieCardProps): JSX.Element {
     >
       <div className="small-film-card__image">
 
-        {isHovered ? <VideoPlayer movie={movie} autoPlay muted /> : <MovieCover movie={movie} />}
+        {isHovered ? <VideoPlayback movie={movie} autoPlay muted /> : <MovieCover movie={movie} />}
 
       </div>
       <h3 className="small-film-card__title">
