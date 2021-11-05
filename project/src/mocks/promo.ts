@@ -7,7 +7,7 @@ export const promoMovie : MovieType = {
   // previewImage: string,
   backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
   // backgroundColor: ,
-  // videoLink: ,
+  videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
   previewVideoLink: 'img/bg-the-grand-budapest-hotel.jpg',
   // description: ,
   // rating: ,

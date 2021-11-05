@@ -1,35 +1,45 @@
 import {MovieType} from '../../types/movie';
-import {useState, useEffect} from 'react';
+import {useState, useRef} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
-function MovieCard(props: {movie: MovieType}): JSX.Element {
+import MovieCover from '../movie-cover/movie-cover';
+import VideoPlayback from '../video-playback/video-playback';
 
-  const [movieCardHover, setMovieCardHover] = useState(false);
+type MovieCardProps = {
+  movie: MovieType;
+}
 
+function MovieCard({movie}: MovieCardProps): JSX.Element {
+
+  const [isHovered, setHovered] = useState(false);
+  const activeRef = useRef<boolean>(false);
   const history = useHistory();
-
-  useEffect(() => {
-    if(movieCardHover) {
-
-      // До момента реализации воспроизведения видео по наведению на карточку фильма, иначе просто movieCardHover нигде не используется, что странно
-
-      /* eslint-disable no-alert, no-console */
-      console.log('работает');
-    }
-  });
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => setMovieCardHover(true)}
-      onMouseLeave={() => setMovieCardHover(false)}
-      onClick={() => history.push(`/films/${props.movie.id}`)}
+      onMouseEnter={() => {
+        activeRef.current = true;
+
+        setTimeout(() => {
+          if (activeRef.current) {
+            setHovered(true);
+          }
+        }, 1000);
+      }}
+      onMouseLeave={() => {
+        activeRef.current = false;
+        setHovered(false);
+      }}
+      onClick={() => history.push(`/films/${movie.id}`)}
     >
       <div className="small-film-card__image">
-        <img src={props.movie.previewImage} alt={props.movie.name} width="280" height="175"/>
+
+        {isHovered ? <VideoPlayback movie={movie} autoPlay muted /> : <MovieCover movie={movie} />}
+
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={''}>{props.movie.name}</Link>
+        <Link className="small-film-card__link" to={''}>{movie.name}</Link>
       </h3>
     </article>
   );
