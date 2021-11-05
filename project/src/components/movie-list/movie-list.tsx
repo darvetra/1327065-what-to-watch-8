@@ -1,5 +1,5 @@
 import {MoviesType} from '../../types/movie';
-import MovieCover from '../movie-cover/movie-cover';
+import MovieCard from '../movie-card/movie-card';
 
 type MovieListProps = {
   movies: MoviesType;
@@ -9,7 +9,7 @@ function MovieList({movies}: MovieListProps): JSX.Element {
   return (
     <div className="catalog__films-list">
 
-      {movies.map((movie) => <MovieCover movie={movie} key={movie.id} />)}
+      {movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
 
     </div>
   );
