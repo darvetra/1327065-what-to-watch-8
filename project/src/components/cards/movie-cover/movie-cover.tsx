@@ -1,4 +1,4 @@
-import {MovieType} from '../../types/movie';
+import {MovieType} from '../../../types/movie';
 
 type MovieCoverProps = {
   movie: MovieType;

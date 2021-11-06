@@ -1,5 +1,5 @@
 import {MoviesType, MovieType} from '../../types/movie';
-import MovieList from '../movie-list/movie-list';
+import MovieList from '../cards/movie-list/movie-list';
 
 type MainScreenProps = {
   promoMovie: MovieType;

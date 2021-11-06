@@ -1,4 +1,4 @@
-import {MovieType} from '../../types/movie';
+import {MovieType} from '../../../types/movie';
 import {useState, useEffect, useRef} from 'react';
 import VideoPlayback from '../video-playback/video-playback';
 

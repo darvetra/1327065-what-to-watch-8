@@ -7,7 +7,7 @@ import LoginScreen from '../login/login';
 import MyListScreen from '../my-list/my-list';
 import MoviePageScreen from '../movie-page/movie-page';
 import AddReview from '../add-review/add-review';
-import VideoPlayer from '../video-player/video-player';
+import VideoPlayer from '../video/video-player/video-player';
 import NotFoundScreen from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
