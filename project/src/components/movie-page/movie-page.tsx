@@ -1,8 +1,9 @@
 import Tabs from '../tabs/tabs';
+import {Fragment} from 'react';
 
 function MoviePageScreen(): JSX.Element {
   return (
-    <>
+    <Fragment>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -147,7 +148,7 @@ function MoviePageScreen(): JSX.Element {
           </div>
         </footer>
       </div>
-    </>
+    </Fragment>
   );
 }
 
