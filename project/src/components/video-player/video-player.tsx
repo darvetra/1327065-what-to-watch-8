@@ -2,8 +2,6 @@ import {useState, useEffect, useRef} from 'react';
 
 import {MovieType} from '../../types/movie';
 
-import VideoPlayback from './video-playback';
-
 type VideoPlayerProps = {
   movie: MovieType;
   autoPlay: boolean;
@@ -45,7 +43,14 @@ function VideoPlayer({movie, autoPlay, muted}: VideoPlayerProps): JSX.Element {
   return (
     <div className="player">
 
-      <VideoPlayback movie={movie} autoPlay muted />
+      <video
+        src={movie.videoLink}
+        className="player__video"
+        poster={movie.previewVideoLink}
+        ref={videoRef}
+        muted={muted}
+        autoPlay={autoPlay}
+      />
 
       <button type="button" className="player__exit">Exit</button>
 
