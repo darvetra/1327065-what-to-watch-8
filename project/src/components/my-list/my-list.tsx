@@ -1,5 +1,6 @@
 import {MoviesType} from '../../types/movie';
-import MovieCover from '../cards/movie-cover/movie-cover';
+
+import MovieCover from '../movie-list/movie-cover';
 
 type MyListProps = {
   movies: MoviesType;

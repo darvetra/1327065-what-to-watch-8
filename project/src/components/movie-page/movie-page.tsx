@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {MoviesType, MovieType} from '../../types/movie';
 import {CommentsType} from '../../types/comment';
 
-import MovieList from '../cards/movie-list/movie-list';
+import MovieList from '../movie-list/movie-list';
 import Tabs from '../tabs/tabs';
 
 const MAX_SIMILAR_MOVIES = 4;

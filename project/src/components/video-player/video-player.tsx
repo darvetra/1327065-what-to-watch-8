@@ -1,6 +1,8 @@
-import {MovieType} from '../../../types/movie';
 import {useState, useEffect, useRef} from 'react';
-import VideoPlayback from '../video-playback/video-playback';
+
+import {MovieType} from '../../types/movie';
+
+import VideoPlayback from './video-playback';
 
 type VideoPlayerProps = {
   movie: MovieType;
