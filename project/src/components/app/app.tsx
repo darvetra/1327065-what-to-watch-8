@@ -1,6 +1,8 @@
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+
 import {MoviesType, MovieType} from '../../types/movie';
+import {CommentsType} from '../../types/comment';
 
 import MainScreen from '../main/main';
 import LoginScreen from '../login/login';
@@ -15,9 +17,10 @@ type AppScreenProps = {
   promoMovie: MovieType,
   movies: MoviesType,
   movie: MovieType,
+  comments: CommentsType,
 }
 
-function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
+function App({promoMovie, movies, movie, comments}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
@@ -35,7 +38,7 @@ function App({promoMovie, movies, movie}: AppScreenProps): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
-          <MoviePageScreen />
+          <MoviePageScreen movie={movie} comments={comments} />
         </Route>
         <Route exact path={AppRoute.AddReview}>
           <AddReview movie={movie} />
