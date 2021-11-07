@@ -38,7 +38,7 @@ function App({promoMovie, movies, movie, comments}: AppScreenProps): JSX.Element
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
-          <MoviePageScreen movie={movie} comments={comments} />
+          <MoviePageScreen movies={movies} movie={movie} comments={comments} />
         </Route>
         <Route exact path={AppRoute.AddReview}>
           <AddReview movie={movie} />
