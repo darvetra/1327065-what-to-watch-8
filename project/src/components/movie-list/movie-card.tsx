@@ -1,9 +1,10 @@
-import {MovieType} from '../../types/movie';
 import {useState, useRef} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 
-import MovieCover from '../movie-cover/movie-cover';
-import VideoPlayback from '../video-playback/video-playback';
+import {MovieType} from '../../types/movie';
+
+import MovieCover from './movie-cover';
+import VideoPlayback from '../video-player/video-playback';
 
 type MovieCardProps = {
   movie: MovieType;

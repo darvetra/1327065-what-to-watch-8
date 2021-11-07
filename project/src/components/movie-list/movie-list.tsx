@@ -1,5 +1,6 @@
 import {MoviesType} from '../../types/movie';
-import MovieCard from '../movie-card/movie-card';
+
+import MovieCard from './movie-card';
 
 type MovieListProps = {
   movies: MoviesType;

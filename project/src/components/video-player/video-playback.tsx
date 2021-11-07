@@ -1,5 +1,6 @@
-import {MovieType} from '../../types/movie';
 import {useRef} from 'react';
+
+import {MovieType} from '../../types/movie';
 
 type VideoPlaybackProps = {
   movie: MovieType;
