@@ -2,9 +2,9 @@ import {ActionType, Actions} from '../types/action';
 import {State} from '../types/state';
 
 import {Genres} from '../const';
-import {filterMoviesByGenre} from "../utils";
+import {filterMoviesByGenre} from '../utils';
 
-import {moviesList} from "../mocks/films";
+import {moviesList} from '../mocks/films';
 
 
 const initialState = {
