@@ -2,7 +2,7 @@ import {
   ActionType,
   ChangeGenreActionType,
   GetMovieListActionType,
-  GetAllGenresActionType,
+  GetAllGenresActionType
 } from '../types/action';
 import {MoviesType} from '../types/movie';
 

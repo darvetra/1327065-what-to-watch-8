@@ -3,7 +3,7 @@ import {MoviesType} from './movie';
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
   GetMovieList = 'list/getMovieList',
-  GetAllGenres = 'list/getAllGenres'
+  GetAllGenres = 'list/getAllGenres',
 }
 
 export type ChangeGenreActionType = {
