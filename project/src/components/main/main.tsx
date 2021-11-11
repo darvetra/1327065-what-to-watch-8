@@ -1,5 +1,15 @@
+import {Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+
+import {changeGenre} from '../../store/action';
+
+import {State} from '../../types/state';
+import {Actions} from '../../types/action';
 import {MoviesType, MovieType} from '../../types/movie';
 
+import {Genres} from '../../const';
+
+import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
 
 type MainScreenProps = {
@@ -7,7 +17,28 @@ type MainScreenProps = {
   movies: MoviesType;
 }
 
-function MainScreen({promoMovie, movies}: MainScreenProps): JSX.Element {
+const mapStateToProps = ({movieList, genre}: State) => ({
+  movieList: movieList,
+  activeGenre: genre,
+});
+
+// Без использования bindActionCreators
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+  onChangeGenre(genre: Genres) {
+    dispatch(changeGenre(genre));
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
+
+function MainScreen(props: ConnectedComponentProps): JSX.Element {
+
+  const {promoMovie, movies} = props;
+  const genres = Object.values(Genres) as Genres[];
+
   return (
     <>
       <section className="film-card">
@@ -73,38 +104,7 @@ function MainScreen({promoMovie, movies}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenresList genres={genres} activeGenre={Genres.Documentary} />
 
           <MovieList movies={movies} />
 
@@ -131,4 +131,5 @@ function MainScreen({promoMovie, movies}: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export {MainScreen};
+export default connector(MainScreen);

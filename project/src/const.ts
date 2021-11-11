@@ -15,13 +15,13 @@ export enum AuthorizationStatus {
 
 export enum Genres {
   All = 'All genres',
-  Comedies = 'Comedy',
+  Comedies = 'Comedies',
   Crime = 'Crime',
   Documentary = 'Documentary',
-  Dramas = 'Drama',
+  Dramas = 'Dramas',
   Horror = 'Horror',
   KidsAndFamily = 'Kids & Family',
   Romance = 'Romance',
   SciFi = 'Sci-Fi',
-  Thrillers = 'Thriller',
+  Thrillers = 'Thrillers',
 }
