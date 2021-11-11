@@ -25,7 +25,7 @@ function App({promoMovie, movies, movie, comments}: AppScreenProps): JSX.Element
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen promoMovie={promoMovie} movies={movies} />
+          <MainScreen promoMovie={promoMovie} />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <LoginScreen />

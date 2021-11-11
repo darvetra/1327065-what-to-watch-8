@@ -1,4 +1,5 @@
 import {MoviesType} from './movie';
+import {Genres} from '../const';
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
@@ -8,7 +9,7 @@ export enum ActionType {
 
 export type ChangeGenreActionType = {
   type: ActionType.ChangeGenre;
-  payload: string;
+  payload: Genres;
 };
 
 export type GetMovieListActionType = {

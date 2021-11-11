@@ -5,20 +5,20 @@ import {changeGenre} from '../../store/action';
 
 import {State} from '../../types/state';
 import {Actions} from '../../types/action';
-import {MoviesType, MovieType} from '../../types/movie';
+import {MovieType} from '../../types/movie';
 
 import {Genres} from '../../const';
+import {filterMoviesByGenre} from '../../utils';
 
 import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
 
 type MainScreenProps = {
   promoMovie: MovieType;
-  movies: MoviesType;
 }
 
-const mapStateToProps = ({movieList, genre}: State) => ({
-  movieList: movieList,
+const mapStateToProps = ({movies, genre}: State) => ({
+  movies: movies,
   activeGenre: genre,
 });
 
@@ -36,8 +36,10 @@ type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
-  const {promoMovie, movies} = props;
+  const {promoMovie, movies, activeGenre, onChangeGenre} = props;
   const genres = Object.values(Genres) as Genres[];
+
+  const showMovies = filterMoviesByGenre(movies, activeGenre);
 
   return (
     <>
@@ -104,9 +106,9 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={genres} activeGenre={Genres.Documentary} />
+          <GenresList genres={genres} activeGenre={activeGenre} onChangeGenre={onChangeGenre}/>
 
-          <MovieList movies={movies} />
+          <MovieList movies={showMovies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

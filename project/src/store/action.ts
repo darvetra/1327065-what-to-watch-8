@@ -5,8 +5,9 @@ import {
   GetAllGenresActionType
 } from '../types/action';
 import {MoviesType} from '../types/movie';
+import {Genres} from '../const';
 
-export const changeGenre = (genre: string): ChangeGenreActionType => ({
+export const changeGenre = (genre: Genres): ChangeGenreActionType => ({
   type: ActionType.ChangeGenre,
   payload: genre,
 });

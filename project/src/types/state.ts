@@ -1,6 +1,7 @@
 import {MoviesType} from './movie';
+import {Genres} from '../const';
 
 export type State = {
-  genre: string,
-  movieList: MoviesType,
+  genre: Genres,
+  movies: MoviesType,
 };

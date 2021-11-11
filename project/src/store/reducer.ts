@@ -9,7 +9,7 @@ import {moviesList} from '../mocks/films';
 
 const initialState = {
   genre: Genres.All,
-  movieList: moviesList,
+  movies: moviesList,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -17,7 +17,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.ChangeGenre:
       return {...state, genre: action.payload};
     case ActionType.GetMovieList:
-      return {...state, movieList: filterMoviesByGenre(action.payload, state.genre)};
+      return {...state, movies: filterMoviesByGenre(action.payload, state.genre)};
     case ActionType.GetAllGenres:
       return {...initialState};
     default:
