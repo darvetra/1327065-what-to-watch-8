@@ -18,8 +18,6 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, genre: action.payload};
     case ActionType.GetMovieList:
       return {...state, movies: filterMoviesByGenre(action.payload, state.genre)};
-    case ActionType.GetAllGenres:
-      return {...initialState};
     default:
       return state;
   }

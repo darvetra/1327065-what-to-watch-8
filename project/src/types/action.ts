@@ -1,25 +1,10 @@
-import {MoviesType} from './movie';
-import {Genres} from '../const';
+import {changeGenre, getMovieList} from '../store/action';
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
   GetMovieList = 'list/getMovieList',
-  GetAllGenres = 'list/getAllGenres',
 }
 
-export type ChangeGenreActionType = {
-  type: ActionType.ChangeGenre;
-  payload: Genres;
-};
-
-export type GetMovieListActionType = {
-  type: ActionType.GetMovieList;
-  payload: MoviesType;
-};
-
-export type GetAllGenresActionType = {
-  type: ActionType.GetAllGenres;
-  payload: MoviesType;
-};
-
-export type Actions = ChangeGenreActionType | GetMovieListActionType | GetAllGenresActionType;
+export type Actions =
+  | ReturnType<typeof changeGenre>
+  | ReturnType<typeof getMovieList>;

@@ -1,23 +1,13 @@
-import {
-  ActionType,
-  ChangeGenreActionType,
-  GetMovieListActionType,
-  GetAllGenresActionType
-} from '../types/action';
+import {ActionType} from '../types/action';
 import {MoviesType} from '../types/movie';
 import {Genres} from '../const';
 
-export const changeGenre = (genre: Genres): ChangeGenreActionType => ({
+export const changeGenre = (genre: Genres) => ({
   type: ActionType.ChangeGenre,
   payload: genre,
-});
+} as const);
 
-export const getMovieList = (movieList: MoviesType): GetMovieListActionType => ({
+export const getMovieList = (movieList: MoviesType) => ({
   type: ActionType.GetMovieList,
   payload: movieList,
-});
-
-export const GetAllGenres = (movieList: MoviesType): GetAllGenresActionType => ({
-  type: ActionType.GetAllGenres,
-  payload: movieList,
-});
+} as const);

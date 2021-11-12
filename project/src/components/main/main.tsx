@@ -18,7 +18,7 @@ type MainScreenProps = {
 }
 
 const mapStateToProps = ({movies, genre}: State) => ({
-  movies: movies,
+  movies,
   activeGenre: genre,
 });
 
