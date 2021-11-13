@@ -1,4 +1,4 @@
-import {Genres} from './const';
+import {SHOW_MOVIE_CARDS, Genres} from './const';
 import {MoviesType} from './types/movie';
 
 /**
@@ -45,10 +45,22 @@ export const getRating = (rating: number) : string => {
  * @param movies
  * @param genre
  */
-export const filterMoviesByGenre = (movies: MoviesType, genre: string): MoviesType => {
+export const getFilterMoviesByGenre = (movies: MoviesType, genre: string) : MoviesType => {
   if (genre === Genres.All) {
     return movies;
   }
 
   return movies.filter((movie) => movie.genre === genre);
 };
+
+/**
+ * Рассчитывает количество выводимых карточек фильмов
+ * @param movieListLength
+ * @param currentCount
+ * @param showCards
+ */
+export const getMovieCardsNumber = (
+  movieListLength: number,
+  currentCount = 0,
+  showCards = SHOW_MOVIE_CARDS) : number => Math.min(movieListLength, currentCount + showCards);
+
