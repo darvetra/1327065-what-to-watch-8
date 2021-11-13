@@ -1,3 +1,7 @@
+export const SHOW_MOVIE_CARDS = 8;
+
+export const MAX_SIMILAR_MOVIES = 4;
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',

@@ -1,7 +1,5 @@
-import {Genres} from './const';
+import {SHOW_MOVIE_CARDS, Genres} from './const';
 import {MoviesType} from './types/movie';
-
-const SHOW_MOVIE_CARDS = 8;
 
 /**
  * Возвращает время в человеческом формате (в часах и минутах)
