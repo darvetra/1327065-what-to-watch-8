@@ -1,3 +1,4 @@
+import {Fragment, useCallback, useEffect, useState} from 'react';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 
@@ -8,7 +9,7 @@ import {Actions} from '../../types/action';
 import {MovieType} from '../../types/movie';
 
 import {Genres} from '../../const';
-import {filterMoviesByGenre} from '../../utils';
+import {getFilterMoviesByGenre, getMovieCardsNumber} from '../../utils';
 
 import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
@@ -40,10 +41,32 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const {promoMovie, movies, activeGenre, onChangeGenre} = props;
   const genres = Object.values(Genres) as Genres[];
 
-  const showMovies = filterMoviesByGenre(movies, activeGenre);
+  const [filteredMovies, setFilteredMovies] = useState(getFilterMoviesByGenre(movies, activeGenre));
+  const [showMoviesNumber, setShowMoviesNumber] = useState(getMovieCardsNumber(filteredMovies.length));
+  const [isLoadMore, setIsLoadMore] = useState(showMoviesNumber < filteredMovies.length);
+
+  useEffect(() => {
+    setFilteredMovies(() => getFilterMoviesByGenre(movies, activeGenre));
+  }, [activeGenre, movies]);
+
+  useEffect(() => {
+    setShowMoviesNumber(getMovieCardsNumber(filteredMovies.length));
+  }, [filteredMovies, filteredMovies.length]);
+
+  useEffect(() => {
+    setIsLoadMore(showMoviesNumber < filteredMovies.length);
+  }, [showMoviesNumber, filteredMovies.length]);
+
+  const onShowMore = useCallback(() => {
+    setShowMoviesNumber((moviesNumber) => getMovieCardsNumber(filteredMovies.length, moviesNumber));
+  }, [filteredMovies.length]);
+
+  const genreChangeHandler = useCallback((genre) => {
+    onChangeGenre(genre);
+  }, [onChangeGenre]);
 
   return (
-    <>
+    <Fragment>
       <section className="film-card">
         <div className="film-card__bg">
           <img src={promoMovie.backgroundImage} alt={promoMovie.name}/>
@@ -107,11 +130,17 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={genres} activeGenre={activeGenre} onChangeGenre={onChangeGenre}/>
+          <GenresList
+            genres={genres}
+            activeGenre={activeGenre}
+            onChangeGenre={genreChangeHandler}
+          />
 
-          <MovieList movies={showMovies} />
+          <MovieList
+            movies={filteredMovies.slice(0, showMoviesNumber)}
+            render={isLoadMore && (() => <ShowMore onShowMore={onShowMore} />)}
+          />
 
-          <ShowMore />
         </section>
 
         <footer className="page-footer">
@@ -128,7 +157,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </>
+    </Fragment>
   );
 }
 

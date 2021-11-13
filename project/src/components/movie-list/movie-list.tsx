@@ -1,18 +1,26 @@
+import {Fragment} from 'react';
+
 import {MoviesType} from '../../types/movie';
 
 import MovieCard from './movie-card';
 
 type MovieListProps = {
-  movies: MoviesType;
+  movies: MoviesType,
+  render?: (() => JSX.Element) | false,
 }
 
-function MovieList({movies}: MovieListProps): JSX.Element {
+function MovieList({movies, render}: MovieListProps): JSX.Element {
   return (
-    <div className="catalog__films-list">
+    <Fragment>
+      <div className="catalog__films-list">
 
-      {movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
+        {movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
 
-    </div>
+      </div>
+
+      {render && render()}
+
+    </Fragment>
   );
 }
 
