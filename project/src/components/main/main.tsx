@@ -12,6 +12,7 @@ import {filterMoviesByGenre} from '../../utils';
 
 import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
+import ShowMore from '../show-more/show-more';
 
 type MainScreenProps = {
   promoMovie: MovieType;
@@ -110,9 +111,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
           <MovieList movies={showMovies} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMore />
         </section>
 
         <footer className="page-footer">
