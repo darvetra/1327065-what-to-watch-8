@@ -1,6 +1,7 @@
 import {Fragment, useCallback, useEffect, useState} from 'react';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import {changeGenre} from '../../store/action';
 
@@ -76,11 +77,11 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link to={''} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <ul className="user-block">
@@ -90,7 +91,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <Link to={''} className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -145,11 +146,11 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to={''} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
