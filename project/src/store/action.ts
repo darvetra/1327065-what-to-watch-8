@@ -7,7 +7,12 @@ export const changeGenre = (genre: Genres) => ({
   payload: genre,
 } as const);
 
-export const getMovieList = (movieList: MoviesType) => ({
+export const getMovieList = (movies: MoviesType) => ({
   type: ActionType.GetMovieList,
-  payload: movieList,
+  payload: movies,
+} as const);
+
+export const loadMovies = (movies: MoviesType) => ({
+  type: ActionType.LoadMovies,
+  payload: movies,
 } as const);
