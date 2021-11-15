@@ -4,12 +4,9 @@ import {State} from '../types/state';
 import {AuthorizationStatus, Genres} from '../const';
 import {getFilterMoviesByGenre} from '../utils';
 
-// убрать, когда подключишь сервер
-import {moviesList} from '../mocks/films';
-
 const initialState = {
   genre: Genres.All,
-  movies: moviesList,
+  movies: [],
   authorizationStatus: AuthorizationStatus.Unknown,
 };
 
