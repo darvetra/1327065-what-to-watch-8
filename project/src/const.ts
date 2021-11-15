@@ -29,3 +29,16 @@ export enum Genres {
   SciFi = 'Sci-Fi',
   Thrillers = 'Thrillers',
 }
+
+export enum APIRoute {
+  Films = '/films',
+  Film = '/films/: id',
+  SimilarFilms = '/films/: id/similar',
+  Promo = '/promo',
+  Favorite = '/favorite',
+  FavoriteStatus = '/favorite/: film_id/: status',
+  FilmComments = ' /comments/: film_id',
+  NewComment = '/comments/: film_id',
+  Login = '/login',
+  Logout = '/logout',
+}
