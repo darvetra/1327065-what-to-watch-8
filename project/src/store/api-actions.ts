@@ -1,11 +1,11 @@
 import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
-import {MoviesType} from "../types/movie";
+import {MoviesType} from '../types/movie';
 
 import {saveToken, dropToken, Token} from '../services/token';
 import {APIRoute, AuthorizationStatus} from '../const';
 
-import {loadMovies, requireAuthorization, requireLogout} from "./action";
+import {loadMovies, requireAuthorization, requireLogout} from './action';
 
 
 export const fetchMovies = (): ThunkActionResult =>
