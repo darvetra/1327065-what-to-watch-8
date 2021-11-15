@@ -1,8 +1,11 @@
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {connect, ConnectedProps} from 'react-redux';
 
-import {MoviesType, MovieType} from '../../types/movie';
+import {State} from '../../types/state';
+import {MovieType} from '../../types/movie';
 import {CommentsType} from '../../types/comment';
+
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 import MainScreen from '../main/main';
 import LoginScreen from '../login/login';
@@ -15,12 +18,21 @@ import PrivateRoute from '../private-route/private-route';
 
 type AppScreenProps = {
   promoMovie: MovieType,
-  movies: MoviesType,
   movie: MovieType,
   comments: CommentsType,
 }
 
-function App({promoMovie, movies, movie, comments}: AppScreenProps): JSX.Element {
+const mapStateToProps = ({movies}: State) => ({
+  movies,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector> & AppScreenProps;
+
+function App(props: PropsFromRedux): JSX.Element {
+  const {promoMovie, movies, movie, comments} = props;
+
   return (
     <BrowserRouter>
       <Switch>
@@ -54,4 +66,6 @@ function App({promoMovie, movies, movie, comments}: AppScreenProps): JSX.Element
   );
 }
 
-export default App;
+// export default App;
+export {App};
+export default connector(App);
