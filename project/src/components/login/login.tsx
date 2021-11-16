@@ -1,4 +1,38 @@
-function LoginScreen(): JSX.Element {
+import {useRef, FormEvent} from 'react';
+import {connect, ConnectedProps} from 'react-redux';
+
+import {loginAction} from '../../store/api-actions';
+
+import {ThunkAppDispatch} from '../../types/action';
+import {AuthData} from '../../types/auth-data';
+
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  onSubmit(authData: AuthData) {
+    dispatch(loginAction(authData));
+  },
+});
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function LoginScreen(props: PropsFromRedux): JSX.Element {
+  const {onSubmit} = props;
+
+  const mailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (mailRef.current !== null && passwordRef.current !== null) {
+      onSubmit({
+        login: mailRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -14,14 +48,14 @@ function LoginScreen(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"/>
+              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={mailRef} />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"/>
+              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef} />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
@@ -48,4 +82,5 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export {LoginScreen};
+export default connector(LoginScreen);
