@@ -5,7 +5,7 @@ import {State} from '../../types/state';
 import {MovieType} from '../../types/movie';
 import {CommentsType} from '../../types/comment';
 
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 
 import MainScreen from '../main/main';
 import LoginScreen from '../login/login';
@@ -46,7 +46,6 @@ function App(props: PropsFromRedux): JSX.Element {
           exact
           path={AppRoute.MyList}
           render={() => <MyListScreen movies={movies} />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Film}>
