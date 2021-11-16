@@ -20,6 +20,8 @@ import {reducer} from './store/reducer';
 import {promoMovie} from './mocks/promo';
 import {commentsList} from './mocks/comments';
 
+import {redirect} from './store/middlewares/redirect';
+
 // моковые данные для превью плеера и добавления ревью
 const movie = promoMovie;
 
@@ -30,6 +32,7 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect),
   ),
 );
 

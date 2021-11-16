@@ -2,7 +2,14 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {AxiosInstance} from 'axios';
 
 import {State} from './state';
-import {changeGenre, getMovieList, loadMovies, requireAuthorization, requireLogout} from '../store/action';
+import {
+  changeGenre,
+  getMovieList,
+  loadMovies,
+  requireAuthorization,
+  requireLogout,
+  redirectToRoute
+} from '../store/action';
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
@@ -10,6 +17,7 @@ export enum ActionType {
   LoadMovies = 'data/loadMovies',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
+  RedirectToRoute = 'login/redirectToRoute',
 }
 
 export type Actions =
@@ -17,7 +25,8 @@ export type Actions =
   | ReturnType<typeof getMovieList>
   | ReturnType<typeof loadMovies>
   | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
+  | ReturnType<typeof requireLogout>
+  | ReturnType<typeof redirectToRoute>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 
