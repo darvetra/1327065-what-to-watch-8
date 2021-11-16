@@ -29,7 +29,7 @@ function AddReview(props: {movie: MovieType}): JSX.Element {
                 <Link to={`/films/${props.movie.id}`} className="breadcrumbs__link">{props.movie.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to='/' className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
@@ -41,7 +41,7 @@ function AddReview(props: {movie: MovieType}): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <Link to='/' className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>

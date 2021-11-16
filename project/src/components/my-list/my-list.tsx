@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import {MoviesType} from '../../types/movie';
 
 import MovieCover from '../movie-list/movie-cover';
@@ -27,7 +28,7 @@ function MyListScreen({movies}: MyListProps): JSX.Element {
             </div>
           </li>
           <li className="user-block__item">
-            <a className="user-block__link">Sign out</a>
+            <Link to='/' className="user-block__link">Sign out</Link>
           </li>
         </ul>
       </header>
