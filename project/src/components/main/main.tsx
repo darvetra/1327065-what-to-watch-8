@@ -1,12 +1,10 @@
 import {Fragment, useCallback, useEffect, useState} from 'react';
-import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {changeGenre} from '../../store/action';
 
 import {State} from '../../types/state';
-import {Actions} from '../../types/action';
 import {MovieType} from '../../types/movie';
 
 import {Genres} from '../../const';
@@ -15,6 +13,9 @@ import {getFilterMoviesByGenre, getMovieCardsNumber} from '../../utils';
 import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
 import ShowMore from '../show-more/show-more';
+
+import {ThunkAppDispatch} from '../../types/action';
+import {logoutAction} from '../../store/api-actions';
 
 type MainScreenProps = {
   promoMovie: MovieType;
@@ -26,9 +27,12 @@ const mapStateToProps = ({movies, genre}: State) => ({
 });
 
 // Без использования bindActionCreators
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onChangeGenre(genre: Genres) {
     dispatch(changeGenre(genre));
+  },
+  logoutSite() {
+    dispatch(logoutAction());
   },
 });
 
@@ -39,7 +43,7 @@ type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
-  const {promoMovie, movies, activeGenre, onChangeGenre} = props;
+  const {promoMovie, movies, activeGenre, onChangeGenre, logoutSite} = props;
   const genres = Object.values(Genres) as Genres[];
 
   const [filteredMovies, setFilteredMovies] = useState(getFilterMoviesByGenre(movies, activeGenre));
@@ -91,7 +95,16 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <Link to={''} className="user-block__link">Sign out</Link>
+              <Link
+                to='/'
+                className="user-block__link"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  logoutSite();
+                }}
+              >
+                Sign out
+              </Link>
             </li>
           </ul>
         </header>
