@@ -1,7 +1,10 @@
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
 import {loginAction} from '../../store/api-actions';
+
+import {AppRoute} from '../../const';
 
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
@@ -21,6 +24,8 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
 
   const mailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const history = useHistory();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -51,16 +56,36 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={mailRef} />
+              <input
+                className="sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="user-email"
+                id="user-email"
+                ref={mailRef}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef} />
+              <input
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="user-password"
+                id="user-password"
+                ref={passwordRef}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
+            <button
+              className="sign-in__btn"
+              type="submit"
+              onClick={() => history.push(AppRoute.Main)}
+            >
+              Sign in
+            </button>
           </div>
         </form>
       </div>
