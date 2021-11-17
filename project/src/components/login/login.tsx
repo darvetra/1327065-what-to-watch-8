@@ -32,7 +32,7 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
 
     if (mailRef.current !== null && passwordRef.current !== null) {
       onSubmit({
-        login: mailRef.current.value,
+        email: mailRef.current.value,
         password: passwordRef.current.value,
       });
     }

@@ -36,7 +36,7 @@ export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       const {response} = error;
 
       if (response?.status === HttpCode.Unauthorized) {
-        return onUnauthorized();
+        onUnauthorized();
       }
 
       return Promise.reject(error);
@@ -59,7 +59,7 @@ export const createAPI = (onUnauthorized: UnauthorizedCallback): AxiosInstance =
       const token = getToken();
 
       if (token) {
-        config.headers['x-token'] = token;
+        config.headers['X-Token'] = token;
       }
 
       return config;

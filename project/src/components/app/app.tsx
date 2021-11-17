@@ -48,8 +48,7 @@ function App(props: PropsFromRedux): JSX.Element {
           exact
           path={AppRoute.MyList}
           render={() => <MyListScreen movies={movies} />}
-        >
-        </PrivateRoute>
+        />
         <Route exact path={AppRoute.Film}>
           <MoviePageScreen movies={movies} movie={movie} comments={comments} />
         </Route>
