@@ -15,7 +15,7 @@ import MovieList from '../movie-list/movie-list';
 import ShowMore from '../show-more/show-more';
 
 import {ThunkAppDispatch} from '../../types/action';
-import {logoutAction} from '../../store/api-actions';
+import UserBlock from '../user-block/user-block';
 
 type MainScreenProps = {
   promoMovie: MovieType;
@@ -31,9 +31,6 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onChangeGenre(genre: Genres) {
     dispatch(changeGenre(genre));
   },
-  logoutSite() {
-    dispatch(logoutAction());
-  },
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -43,7 +40,7 @@ type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
-  const {promoMovie, movies, activeGenre, onChangeGenre, logoutSite} = props;
+  const {promoMovie, movies, activeGenre, onChangeGenre} = props;
   const genres = Object.values(Genres) as Genres[];
 
   const [filteredMovies, setFilteredMovies] = useState(getFilterMoviesByGenre(movies, activeGenre));
@@ -88,25 +85,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             </Link>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link
-                to='/'
-                className="user-block__link"
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  logoutSite();
-                }}
-              >
-                Sign out
-              </Link>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__wrap">

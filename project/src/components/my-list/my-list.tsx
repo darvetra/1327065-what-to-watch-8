@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
 import {MoviesType} from '../../types/movie';
 
 import MovieCover from '../movie-list/movie-cover';
+import UserBlock from '../user-block/user-block';
 
 type MyListProps = {
   movies: MoviesType;
@@ -21,16 +21,7 @@ function MyListScreen({movies}: MyListProps): JSX.Element {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </li>
-          <li className="user-block__item">
-            <Link to='/' className="user-block__link">Sign out</Link>
-          </li>
-        </ul>
+        <UserBlock />
       </header>
 
       <section className="catalog">
