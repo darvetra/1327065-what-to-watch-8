@@ -4,6 +4,8 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {ThunkAppDispatch} from './types/action';
 
@@ -42,6 +44,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ToastContainer />
       <App promoMovie={promoMovie} movie={movie} comments={commentsList}/>
     </Provider>
   </React.StrictMode>,

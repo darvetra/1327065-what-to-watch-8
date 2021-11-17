@@ -21,9 +21,10 @@ type MainScreenProps = {
   promoMovie: MovieType;
 }
 
-const mapStateToProps = ({movies, genre}: State) => ({
+const mapStateToProps = ({movies, genre, authorizationStatus}: State) => ({
   movies,
   activeGenre: genre,
+  authorizationStatus,
 });
 
 // Без использования bindActionCreators

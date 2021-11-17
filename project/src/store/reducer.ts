@@ -4,10 +4,19 @@ import {State} from '../types/state';
 import {AuthorizationStatus, Genres} from '../const';
 import {getFilterMoviesByGenre} from '../utils';
 
+export const initialUser = {
+  id: 0,
+  email: '',
+  name: '',
+  avatarUrl: '',
+  token: '',
+};
+
 const initialState = {
   genre: Genres.All,
   movies: [],
   authorizationStatus: AuthorizationStatus.Unknown,
+  user: initialUser,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
