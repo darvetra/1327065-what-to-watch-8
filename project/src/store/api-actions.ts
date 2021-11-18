@@ -1,3 +1,5 @@
+import {toast} from 'react-toastify';
+
 import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
 import {MovieTypeFromServer} from '../types/movie';
@@ -13,6 +15,9 @@ import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {loadMovies, requireAuthorization, redirectToRoute, requireLogout, authUser} from './action';
 
 
+const AUTH_FAIL_MESSAGE = 'Не забудьте авторизоваться';
+
+
 export const fetchMovies = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data: serverMovies} = await api.get(APIRoute.Films);
@@ -22,15 +27,19 @@ export const fetchMovies = (): ThunkActionResult =>
 
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    await api.get(APIRoute.Login)
-      .then(({status, data}) => {
-        if (status && status !== HttpCode.Unauthorized) {
+    try {
+      await api.get(APIRoute.Login)
+        .then(({status, data}) => {
+          if (status && status !== HttpCode.Unauthorized) {
+            dispatch(requireAuthorization(AuthorizationStatus.Auth));
+            dispatch(authUser(adaptToClientUser(data)));
+            return;
+          }
           dispatch(requireAuthorization(AuthorizationStatus.Auth));
-          dispatch(authUser(adaptToClientUser(data)));
-          return;
-        }
-        dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      });
+        });
+    } catch {
+      toast.info(AUTH_FAIL_MESSAGE);
+    }
   };
 
 export const loginAction = ({email, password}: AuthData): ThunkActionResult =>
