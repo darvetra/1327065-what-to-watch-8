@@ -1,12 +1,10 @@
 import {Fragment, useCallback, useEffect, useState} from 'react';
-import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {changeGenre} from '../../store/action';
 
 import {State} from '../../types/state';
-import {Actions} from '../../types/action';
 import {MovieType} from '../../types/movie';
 
 import {Genres} from '../../const';
@@ -16,17 +14,21 @@ import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
 import ShowMore from '../show-more/show-more';
 
+import {ThunkAppDispatch} from '../../types/action';
+import UserBlock from '../user-block/user-block';
+
 type MainScreenProps = {
   promoMovie: MovieType;
 }
 
-const mapStateToProps = ({movies, genre}: State) => ({
+const mapStateToProps = ({movies, genre, authorizationStatus}: State) => ({
   movies,
   activeGenre: genre,
+  authorizationStatus,
 });
 
 // Без использования bindActionCreators
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onChangeGenre(genre: Genres) {
     dispatch(changeGenre(genre));
   },
@@ -84,16 +86,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             </Link>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to={''} className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__wrap">

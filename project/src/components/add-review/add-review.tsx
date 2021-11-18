@@ -2,6 +2,7 @@ import {MovieType} from '../../types/movie';
 import {Link} from 'react-router-dom';
 
 import CommentForm from '../comment-form/comment-form';
+import UserBlock from '../user-block/user-block';
 
 function AddReview(props: {movie: MovieType}): JSX.Element {
 
@@ -29,21 +30,12 @@ function AddReview(props: {movie: MovieType}): JSX.Element {
                 <Link to={`/films/${props.movie.id}`} className="breadcrumbs__link">{props.movie.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link to='/' className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

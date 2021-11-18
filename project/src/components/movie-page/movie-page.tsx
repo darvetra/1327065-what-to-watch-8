@@ -8,11 +8,7 @@ import {MAX_SIMILAR_MOVIES} from '../../const';
 
 import MovieList from '../movie-list/movie-list';
 import Tabs from '../tabs/tabs';
-
-const userBlockStyle = {
-  background: 'transparent',
-  border: 0,
-};
+import UserBlock from '../user-block/user-block';
 
 type MoviePageProps = {
   movies: MoviesType;
@@ -46,16 +42,7 @@ function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element
               </Link>
             </div>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <button className="user-block__link" style={userBlockStyle}>Sign out</button>
-              </li>
-            </ul>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">

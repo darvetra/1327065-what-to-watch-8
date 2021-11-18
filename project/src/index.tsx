@@ -4,6 +4,8 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {ThunkAppDispatch} from './types/action';
 
@@ -20,6 +22,8 @@ import {reducer} from './store/reducer';
 import {promoMovie} from './mocks/promo';
 import {commentsList} from './mocks/comments';
 
+import {redirect} from './store/middlewares/redirect';
+
 // моковые данные для превью плеера и добавления ревью
 const movie = promoMovie;
 
@@ -30,6 +34,7 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
+    applyMiddleware(redirect),
   ),
 );
 
@@ -39,6 +44,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ToastContainer />
       <App promoMovie={promoMovie} movie={movie} comments={commentsList}/>
     </Provider>
   </React.StrictMode>,
