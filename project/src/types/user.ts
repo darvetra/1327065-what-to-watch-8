@@ -7,3 +7,11 @@ export type UserType = {
   avatarUrl?: string,
   token?: Token,
 }
+
+export type UserTypeFromServer = {
+  id: number,
+  email: string,
+  name: string,
+  'avatar_url'?: string,
+  token: Token,
+}

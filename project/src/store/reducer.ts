@@ -12,8 +12,29 @@ export const initialUser = {
   token: '',
 };
 
+export const initialPromoMovie = {
+  id: 0,
+  name: '',
+  posterImage: '',
+  previewImage: '',
+  backgroundImage: '',
+  backgroundColor: '',
+  videoLink: '',
+  previewVideoLink: '',
+  description: '',
+  rating: 0,
+  scoresCount: 0,
+  director: '',
+  starring: [],
+  runTime: 0,
+  genre: '',
+  released: 0,
+  isFavorite: false,
+};
+
 const initialState = {
   genre: Genres.All,
+  promoFilm: initialPromoMovie,
   movies: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   user: initialUser,
@@ -31,6 +52,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, authorizationStatus: action.payload};
     case ActionType.RequireLogout:
       return {...state, authorizationStatus: AuthorizationStatus.NoAuth};
+    case ActionType.AuthUser:
+      return {...state, user: action.payload} as State;
     default:
       return state;
   }

@@ -20,7 +20,7 @@ export type MovieType = {
 
 export type MoviesType = MovieType[];
 
-export interface ServerMovieType {
+export interface MovieTypeFromServer {
   id: number;
   name: string;
   'poster_image': string;

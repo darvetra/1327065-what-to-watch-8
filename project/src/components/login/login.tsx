@@ -1,14 +1,12 @@
 import {Link} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import {useHistory} from 'react-router-dom';
-
-import {loginAction} from '../../store/api-actions';
-
-import {AppRoute} from '../../const';
 
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
+
+import {loginAction} from '../../store/api-actions';
+
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -25,8 +23,6 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
 
   const mailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const history = useHistory();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -54,7 +50,10 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        <form
+          className="sign-in__form"
+          onSubmit={handleSubmit}
+        >
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
@@ -83,7 +82,6 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
             <button
               className="sign-in__btn"
               type="submit"
-              onClick={() => history.push(AppRoute.MyList)}
             >
               Sign in
             </button>
@@ -93,11 +91,11 @@ function LoginScreen(props: PropsFromRedux): JSX.Element {
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link to='/' className="logo__link logo__link--light">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <div className="copyright">

@@ -47,7 +47,7 @@ function App(props: PropsFromRedux): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.MyList}
-          render={() => <MyListScreen movies={movies} />}
+          render={(history) => <MyListScreen movies={movies} />}
         />
         <Route exact path={AppRoute.Film}>
           <MoviePageScreen movies={movies} movie={movie} comments={comments} />
