@@ -2,6 +2,7 @@ import {ActionType} from '../types/action';
 import {MoviesType, MovieType} from '../types/movie';
 import {AppRoute, AuthorizationStatus, Genres} from '../const';
 import {UserType} from '../types/user';
+import {CommentsType} from '../types/comment';
 
 export const changeGenre = (genre: Genres) => ({
   type: ActionType.ChangeGenre,
@@ -16,6 +17,11 @@ export const getMovieList = (movies: MoviesType) => ({
 export const getMovie = (movie: MovieType) => ({
   type: ActionType.GetMovie,
   payload: movie,
+} as const);
+
+export const getComments = (reviews: CommentsType) => ({
+  type: ActionType.GetComments,
+  payload: reviews,
 } as const);
 
 export const getSemilarMovies = (movies: MoviesType) => ({

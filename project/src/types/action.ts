@@ -6,6 +6,7 @@ import {
   changeGenre,
   getMovieList,
   getMovie,
+  getComments,
   loadMovies,
   requireAuthorization,
   requireLogout,
@@ -18,6 +19,7 @@ export enum ActionType {
   ChangeGenre = 'list/changeGenre',
   GetMovieList = 'data/getMovieList',
   GetMovie = 'data/getMovie',
+  GetComments = 'data/getComments',
   GetSemilarMovies = 'data/getSemilarMovies',
   LoadMovies = 'data/loadMovies',
   RequireAuthorization = 'user/requireAuthorization',
@@ -30,6 +32,7 @@ export type Actions =
   | ReturnType<typeof changeGenre>
   | ReturnType<typeof getMovieList>
   | ReturnType<typeof getMovie>
+  | ReturnType<typeof getComments>
   | ReturnType<typeof getSemilarMovies>
   | ReturnType<typeof loadMovies>
   | ReturnType<typeof requireAuthorization>

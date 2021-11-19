@@ -4,6 +4,7 @@ import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
 import {MoviesType, MovieType, MovieTypeFromServer} from '../types/movie';
 import {UserTypeFromServer} from '../types/user';
+import {CommentsType} from '../types/comment';
 
 import {saveToken, dropToken} from '../services/token';
 import {adaptMovieToClient, adaptToClientUser} from '../services/adapter';
@@ -19,7 +20,8 @@ import {
   requireLogout,
   authUser,
   getMovie,
-  getSemilarMovies
+  getSemilarMovies,
+  getComments
 } from './action';
 
 
@@ -37,6 +39,12 @@ export const fetchMovie = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<MovieType>(APIRoute.Film.replace(':id', movieId.toString()));
     dispatch(getMovie(data));
+  };
+
+export const fetchComments = (movieId: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<CommentsType>(APIRoute.FilmComments.replace(':film_id', movieId.toString()));
+    dispatch(getComments(data));
   };
 
 export const fetchSimilarMovies = (movieId: number): ThunkActionResult =>
