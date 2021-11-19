@@ -1,34 +1,65 @@
-import {Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import {Fragment, useEffect, Dispatch} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import {connect, ConnectedProps} from 'react-redux';
 
-import {MoviesType, MovieType} from '../../types/movie';
-import {CommentsType} from '../../types/comment';
+import {State} from '../../types/state';
+import {ThunkAppDispatch, Actions} from '../../types/action';
 
-import {MAX_SIMILAR_MOVIES} from '../../const';
+import {fetchMovie, fetchComments, fetchSimilarMovies} from '../../store/api-actions';
+import {MAX_SIMILAR_MOVIES, RouteParams, AppRoute} from '../../const';
 
 import MovieList from '../movie-list/movie-list';
 import Tabs from '../tabs/tabs';
 import UserBlock from '../user-block/user-block';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type MoviePageProps = {
-  movies: MoviesType;
-  movie: MovieType;
-  comments: CommentsType;
+const mapStateToProps = ({movie, similarMovies, comments}: State) => ({
+  movie,
+  similarMovies,
+  comments,
+});
+
+const mapDispatchToProps =(dispatch: Dispatch<Actions>) => ({
+  loadMovie(movieId: number) {
+    (dispatch as ThunkAppDispatch)(fetchMovie(movieId));
+  },
+  loadSimilarMovies(movieId: number) {
+    (dispatch as ThunkAppDispatch)(fetchSimilarMovies(movieId));
+  },
+  loadComments(movieId: number) {
+    (dispatch as ThunkAppDispatch)(fetchComments(movieId));
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type params = {
+  id: string,
 }
 
-function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element {
+function MoviePageScreen({movie, similarMovies, comments, loadMovie, loadSimilarMovies, loadComments}: PropsFromRedux): JSX.Element {
+  const {id}: params = useParams();
 
-  const similarMovies: MoviesType = movies
-    .filter(
-      (item) => item.genre === movie.genre,
-    );
+  useEffect(() => {
+    const movieId = Number(id);
+    loadMovie(movieId);
+    loadSimilarMovies(movieId);
+    loadComments(movieId);
+  }, [id]);
+
+  if (!movie) {
+    return <LoadingScreen />;
+  }
+
+  const {backgroundImage, genre, name, released, posterImage} = movie;
 
   return (
     <Fragment>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={movie.backgroundImage} alt={movie.name} />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -47,10 +78,10 @@ function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{movie.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{movie.genre}</span>
-                <span className="film-card__year">{movie.released}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -66,7 +97,7 @@ function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to="add-review.html" className="btn film-card__button">Add review</Link>
+                <Link to={AppRoute.AddReview.replace(RouteParams.ID, id)} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -75,7 +106,7 @@ function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={movie.posterImage} alt={`${movie.name} poster`} width="218" height="327"/>
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
@@ -112,4 +143,5 @@ function MoviePageScreen({movies, movie, comments}: MoviePageProps): JSX.Element
   );
 }
 
-export default MoviePageScreen;
+export {MoviePageScreen};
+export default connector(MoviePageScreen);

@@ -11,7 +11,7 @@ import {adaptMovieToClient, adaptUserToClient, adaptCommentToClient} from '../se
 import {HttpCode} from '../services/api';
 import {initialUser} from './reducer';
 
-import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
+import {APIRoute, AuthorizationStatus, AppRoute, RouteParams} from '../const';
 
 import {
   loadMovies,
@@ -37,27 +37,27 @@ export const fetchMovies = (): ThunkActionResult =>
 
 export const fetchMovie = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<MovieTypeFromServer>(APIRoute.Film.replace(':id', movieId.toString()));
+    const {data} = await api.get<MovieTypeFromServer>(APIRoute.Film.replace(RouteParams.ID, movieId.toString()));
     const adaptedData = adaptMovieToClient(data);
     dispatch(getMovie(adaptedData));
   };
 
 export const fetchComments = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<CommentsType>(APIRoute.FilmComments.replace(':film_id', movieId.toString()));
+    const {data} = await api.get<CommentsType>(APIRoute.FilmComments.replace(RouteParams.FILM_ID, movieId.toString()));
     const adaptedData = data.map((comment: CommentType) => adaptCommentToClient(comment));
     dispatch(getComments(adaptedData));
   };
 
 export const submitComment = (movieId: number, comment: CommentType): ThunkActionResult =>
   async (dispatch, _getState, api) : Promise<void> => {
-    const {data} = await api.post<CommentsType>(APIRoute.FilmComments.replace(':film_id', movieId.toString()), comment);
+    const {data} = await api.post<CommentsType>(APIRoute.FilmComments.replace(RouteParams.FILM_ID, movieId.toString()), comment);
     dispatch(getComments(data));
   };
 
 export const fetchSimilarMovies = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<MovieTypeFromServer[]>(APIRoute.SimilarFilms.replace(':id', movieId.toString()));
+    const {data} = await api.get<MovieTypeFromServer[]>(APIRoute.SimilarFilms.replace(RouteParams.ID, movieId.toString()));
     const adaptedData = data.map((movie) => adaptMovieToClient(movie));
     dispatch(getSimilarMovies(adaptedData));
   };

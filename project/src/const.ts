@@ -11,6 +11,11 @@ export enum AppRoute {
   Player = '/player/:id',
 }
 
+export const RouteParams = {
+  ID: ': id',
+  FILM_ID: ': film_id',
+};
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

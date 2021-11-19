@@ -50,7 +50,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.GetMovieList:
       return {...state, movies: getFilterMoviesByGenre(action.payload, state.genre)};
     case ActionType.LoadMovies:
-      return {...initialState, movies: action.payload};
+      return {...state, movies: action.payload};
     case ActionType.GetMovie:
       return {...state, movie: action.payload};
     case ActionType.GetSimilarMovies:
