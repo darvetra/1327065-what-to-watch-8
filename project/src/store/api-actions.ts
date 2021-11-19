@@ -7,7 +7,7 @@ import {UserTypeFromServer} from '../types/user';
 import {CommentsType, CommentType} from '../types/comment';
 
 import {saveToken, dropToken} from '../services/token';
-import {adaptMovieToClient, adaptToClientUser} from '../services/adapter';
+import {adaptMovieToClient, adaptUserToClient, adaptCommentToClient} from '../services/adapter';
 import {HttpCode} from '../services/api';
 import {initialUser} from './reducer';
 
@@ -45,7 +45,8 @@ export const fetchMovie = (movieId: number): ThunkActionResult =>
 export const fetchComments = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<CommentsType>(APIRoute.FilmComments.replace(':film_id', movieId.toString()));
-    dispatch(getComments(data));
+    const adaptedData = data.map((comment: CommentType) => adaptCommentToClient(comment));
+    dispatch(getComments(adaptedData));
   };
 
 export const submitComment = (movieId: number, comment: CommentType): ThunkActionResult =>
@@ -68,7 +69,7 @@ export const checkAuthAction = (): ThunkActionResult =>
         .then(({status, data}) => {
           if (status && status !== HttpCode.Unauthorized) {
             dispatch(requireAuthorization(AuthorizationStatus.Auth));
-            dispatch(authUser(adaptToClientUser(data)));
+            dispatch(authUser(adaptUserToClient(data)));
             return;
           }
           dispatch(requireAuthorization(AuthorizationStatus.Auth));
@@ -82,7 +83,7 @@ export const loginAction = ({email, password}: AuthData): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     const {data} = await api.post<UserTypeFromServer>(APIRoute.Login, {email, password});
     saveToken(data.token);
-    dispatch(authUser(adaptToClientUser(data)));
+    dispatch(authUser(adaptUserToClient(data)));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.MyList));
   };

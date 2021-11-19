@@ -1,5 +1,6 @@
 import {MovieType, MovieTypeFromServer} from '../types/movie';
 import {UserType, UserTypeFromServer} from '../types/user';
+import {CommentType} from '../types/comment';
 
 export const adaptMovieToClient = (serverMovie: MovieTypeFromServer): MovieType => ({
   id: serverMovie['id'],
@@ -21,7 +22,7 @@ export const adaptMovieToClient = (serverMovie: MovieTypeFromServer): MovieType 
   isFavorite: serverMovie['is_favorite'],
 });
 
-export function adaptToClientUser(user: UserTypeFromServer) {
+export function adaptUserToClient(user: UserTypeFromServer) {
   const adaptedUser = Object.assign(
     {},
     user,
@@ -33,4 +34,10 @@ export function adaptToClientUser(user: UserTypeFromServer) {
   delete adaptedUser.avatar_url;
 
   return <UserType>adaptedUser;
+}
+
+export function adaptCommentToClient(data: CommentType): CommentType {
+  return Object.assign({}, data, {
+    date: new Date(data.date),
+  });
 }
