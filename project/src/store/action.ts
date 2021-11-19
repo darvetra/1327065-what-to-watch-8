@@ -18,6 +18,11 @@ export const getMovie = (movie: MovieType) => ({
     payload: movie,
 } as const);
 
+export const getSemilarMovies = (movies: MoviesType) => ({
+      type: ActionType.GetSemilarMovies,
+    payload: movies,
+  } as const);
+
 export const loadMovies = (movies: MoviesType) => ({
   type: ActionType.LoadMovies,
   payload: movies,

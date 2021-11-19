@@ -10,13 +10,15 @@ import {
   requireAuthorization,
   requireLogout,
   authUser,
-  redirectToRoute
+  redirectToRoute,
+  getSemilarMovies
 } from '../store/action';
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
   GetMovieList = 'data/getMovieList',
   GetMovie = 'data/getMovie',
+  GetSemilarMovies = 'data/getSemilarMovies',
   LoadMovies = 'data/loadMovies',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
@@ -28,6 +30,7 @@ export type Actions =
   | ReturnType<typeof changeGenre>
   | ReturnType<typeof getMovieList>
   | ReturnType<typeof getMovie>
+  | ReturnType<typeof getSemilarMovies>
   | ReturnType<typeof loadMovies>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>

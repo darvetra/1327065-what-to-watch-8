@@ -2,7 +2,7 @@ import {toast} from 'react-toastify';
 
 import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
-import {MovieType, MovieTypeFromServer} from '../types/movie';
+import {MoviesType, MovieType, MovieTypeFromServer} from '../types/movie';
 import {UserTypeFromServer} from '../types/user';
 
 import {saveToken, dropToken} from '../services/token';
@@ -12,7 +12,15 @@ import {initialUser} from './reducer';
 
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 
-import {loadMovies, requireAuthorization, redirectToRoute, requireLogout, authUser, getMovie} from './action';
+import {
+  loadMovies,
+  requireAuthorization,
+  redirectToRoute,
+  requireLogout,
+  authUser,
+  getMovie,
+  getSemilarMovies
+} from './action';
 
 
 const AUTH_FAIL_MESSAGE = 'Не забудьте авторизоваться';
@@ -30,6 +38,12 @@ export const fetchMovie = (movieId: number): ThunkActionResult =>
     const {data} = await api.get<MovieType>(APIRoute.Film.replace(':id', movieId.toString()));
     dispatch(getMovie(data));
   }
+
+export const fetchSimilarMovies = (movieId: number): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<MoviesType>(APIRoute.SimilarFilms.replace(':id', movieId.toString()));
+    dispatch(getSemilarMovies(data));
+  };
 
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
