@@ -2,7 +2,7 @@ import {toast} from 'react-toastify';
 
 import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
-import {MoviesType, MovieType, MovieTypeFromServer} from '../types/movie';
+import {MovieTypeFromServer} from '../types/movie';
 import {UserTypeFromServer} from '../types/user';
 import {CommentsType, CommentType} from '../types/comment';
 
@@ -20,7 +20,7 @@ import {
   requireLogout,
   authUser,
   getMovie,
-  getSemilarMovies,
+  getSimilarMovies,
   getComments
 } from './action';
 
@@ -37,8 +37,9 @@ export const fetchMovies = (): ThunkActionResult =>
 
 export const fetchMovie = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<MovieType>(APIRoute.Film.replace(':id', movieId.toString()));
-    dispatch(getMovie(data));
+    const {data} = await api.get<MovieTypeFromServer>(APIRoute.Film.replace(':id', movieId.toString()));
+    const adaptedData = adaptMovieToClient(data);
+    dispatch(getMovie(adaptedData));
   };
 
 export const fetchComments = (movieId: number): ThunkActionResult =>
@@ -55,8 +56,9 @@ export const submitComment = (movieId: number, comment: CommentType): ThunkActio
 
 export const fetchSimilarMovies = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<MoviesType>(APIRoute.SimilarFilms.replace(':id', movieId.toString()));
-    dispatch(getSemilarMovies(data));
+    const {data} = await api.get<MovieTypeFromServer[]>(APIRoute.SimilarFilms.replace(':id', movieId.toString()));
+    const adaptedData = data.map((movie) => adaptMovieToClient(movie));
+    dispatch(getSimilarMovies(adaptedData));
   };
 
 export const checkAuthAction = (): ThunkActionResult =>
