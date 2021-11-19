@@ -14,14 +14,14 @@ export const getMovieList = (movies: MoviesType) => ({
 } as const);
 
 export const getMovie = (movie: MovieType) => ({
-    type: ActionType.GetMovie,
-    payload: movie,
+  type: ActionType.GetMovie,
+  payload: movie,
 } as const);
 
 export const getSemilarMovies = (movies: MoviesType) => ({
-      type: ActionType.GetSemilarMovies,
-    payload: movies,
-  } as const);
+  type: ActionType.GetSemilarMovies,
+  payload: movies,
+} as const);
 
 export const loadMovies = (movies: MoviesType) => ({
   type: ActionType.LoadMovies,

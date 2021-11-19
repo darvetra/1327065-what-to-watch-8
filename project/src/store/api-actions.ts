@@ -37,7 +37,7 @@ export const fetchMovie = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<MovieType>(APIRoute.Film.replace(':id', movieId.toString()));
     dispatch(getMovie(data));
-  }
+  };
 
 export const fetchSimilarMovies = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
