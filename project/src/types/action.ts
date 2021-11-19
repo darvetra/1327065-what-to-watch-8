@@ -5,6 +5,7 @@ import {State} from './state';
 import {
   changeGenre,
   getMovieList,
+  getMovie,
   loadMovies,
   requireAuthorization,
   requireLogout,
@@ -14,7 +15,8 @@ import {
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
-  GetMovieList = 'list/getMovieList',
+  GetMovieList = 'data/getMovieList',
+  GetMovie = 'data/getMovie',
   LoadMovies = 'data/loadMovies',
   RequireAuthorization = 'user/requireAuthorization',
   RequireLogout = 'user/requireLogout',
@@ -25,6 +27,7 @@ export enum ActionType {
 export type Actions =
   | ReturnType<typeof changeGenre>
   | ReturnType<typeof getMovieList>
+  | ReturnType<typeof getMovie>
   | ReturnType<typeof loadMovies>
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>

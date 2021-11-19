@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action';
-import {MoviesType} from '../types/movie';
+import {MoviesType, MovieType} from '../types/movie';
 import {AppRoute, AuthorizationStatus, Genres} from '../const';
 import {UserType} from '../types/user';
 
@@ -11,6 +11,11 @@ export const changeGenre = (genre: Genres) => ({
 export const getMovieList = (movies: MoviesType) => ({
   type: ActionType.GetMovieList,
   payload: movies,
+} as const);
+
+export const getMovie = (movie: MovieType) => ({
+    type: ActionType.GetMovie,
+    payload: movie,
 } as const);
 
 export const loadMovies = (movies: MoviesType) => ({
