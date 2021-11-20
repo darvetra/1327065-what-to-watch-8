@@ -20,7 +20,6 @@ import App from './components/app/app';
 import {reducer} from './store/reducer';
 
 import {promoMovie} from './mocks/promo';
-import {commentsList} from './mocks/comments';
 
 import {redirect} from './store/middlewares/redirect';
 
@@ -45,7 +44,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ToastContainer />
-      <App promoMovie={promoMovie} movie={movie} comments={commentsList}/>
+      <App promoMovie={promoMovie} movie={movie} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

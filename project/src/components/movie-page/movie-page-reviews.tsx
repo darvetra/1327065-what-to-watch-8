@@ -16,7 +16,7 @@ function MoviePageReviews({comments}: MoviePageReviewsProps): JSX.Element {
         {comments.map(
           (review, i) =>
             i <= halfOfTheComments && (
-              <Review key={review.id} comment={review} />
+              <Review key={review.id} review={review} />
             ),
         )}
 
@@ -26,7 +26,7 @@ function MoviePageReviews({comments}: MoviePageReviewsProps): JSX.Element {
         {comments.map(
           (review, i) =>
             i > halfOfTheComments && (
-              <Review key={review.id} comment={review} />
+              <Review key={review.id} review={review} />
             ),
         )}
 

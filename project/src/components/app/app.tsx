@@ -3,7 +3,6 @@ import {connect, ConnectedProps} from 'react-redux';
 
 import {State} from '../../types/state';
 import {MovieType} from '../../types/movie';
-import {CommentsType} from '../../types/comment';
 
 import {AppRoute} from '../../const';
 
@@ -21,7 +20,6 @@ import browserHistory from '../../browser-history';
 type AppScreenProps = {
   promoMovie: MovieType,
   movie: MovieType,
-  comments: CommentsType,
 }
 
 const mapStateToProps = ({movies}: State) => ({
@@ -33,7 +31,7 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector> & AppScreenProps;
 
 function App(props: PropsFromRedux): JSX.Element {
-  const {promoMovie, movies, movie, comments} = props;
+  const {promoMovie, movies, movie} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -50,10 +48,10 @@ function App(props: PropsFromRedux): JSX.Element {
           render={(history) => <MyListScreen movies={movies} />}
         />
         <Route exact path={AppRoute.Film}>
-          <MoviePageScreen movies={movies} movie={movie} comments={comments} />
+          <MoviePageScreen />
         </Route>
         <Route exact path={AppRoute.AddReview}>
-          <AddReview movie={movie} />
+          <AddReview />
         </Route>
         <Route exact path={AppRoute.Player}>
           <VideoPlayer movie={movie} autoPlay muted />

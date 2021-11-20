@@ -1,11 +1,24 @@
-import {UserType} from './user';
-
-export type CommentType = {
+export type Item = {
   id: number,
-  user: UserType,
+}
+
+type User = Item & {
+  name: string,
+}
+
+export type CommentPost = {
   rating: number,
   comment: string,
-  date: string,
+}
+
+export type CommentTypeAdaptedToServer = Item & CommentPost & {
+  user: User,
+  // date: string,
+  date: Date,
+}
+
+export type CommentType = Omit<CommentTypeAdaptedToServer, 'date'> & {
+  date: Date,
 }
 
 export type CommentsType = CommentType[]

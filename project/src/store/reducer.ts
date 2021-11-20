@@ -36,6 +36,9 @@ const initialState = {
   genre: Genres.All,
   promoFilm: initialPromoMovie,
   movies: [],
+  movie: null,
+  comments: [],
+  similarMovies: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   user: initialUser,
 };
@@ -47,7 +50,13 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ActionType.GetMovieList:
       return {...state, movies: getFilterMoviesByGenre(action.payload, state.genre)};
     case ActionType.LoadMovies:
-      return {...initialState, movies: action.payload};
+      return {...state, movies: action.payload};
+    case ActionType.GetMovie:
+      return {...state, movie: action.payload};
+    case ActionType.GetComments:
+      return {...state, comments: action.payload};
+    case ActionType.GetSimilarMovies:
+      return {...state, similarMovies: action.payload};
     case ActionType.RequireAuthorization:
       return {...state, authorizationStatus: action.payload};
     case ActionType.RequireLogout:

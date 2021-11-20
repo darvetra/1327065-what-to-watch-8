@@ -21,7 +21,7 @@ export const adaptMovieToClient = (serverMovie: MovieTypeFromServer): MovieType 
   isFavorite: serverMovie['is_favorite'],
 });
 
-export function adaptToClientUser(user: UserTypeFromServer) {
+export function adaptUserToClient(user: UserTypeFromServer) {
   const adaptedUser = Object.assign(
     {},
     user,
@@ -34,3 +34,9 @@ export function adaptToClientUser(user: UserTypeFromServer) {
 
   return <UserType>adaptedUser;
 }
+
+// export function adaptCommentToClient(data: CommentTypeAdaptedToServer): CommentType {
+//   return Object.assign({}, data, {
+//     date: new Date(data.date),
+//   });
+// }

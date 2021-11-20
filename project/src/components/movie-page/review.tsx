@@ -1,22 +1,24 @@
 import {CommentType} from '../../types/comment';
 
 type ReviewProps = {
-  comment: CommentType;
+  review: CommentType;
 }
 
-function Review({comment}: ReviewProps): JSX.Element {
+function Review({review}: ReviewProps): JSX.Element {
+  const {user, comment, rating, date} = review;
+
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{comment.comment}</p>
+        <p className="review__text">{comment}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{comment.user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{comment.date}</time>
+          <cite className="review__author">{user.name}</cite>
+          <time className="review__date" dateTime="2016-12-24">{date}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{comment.rating}</div>
+      <div className="review__rating">{rating}</div>
     </div>
   );
 }
