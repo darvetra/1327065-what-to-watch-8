@@ -1,8 +1,13 @@
-import {UserType} from './user';
+// import {UserType} from './user';
 
 export type CommentType = {
   id: number,
-  user: UserType,
+  // user: UserType,
+  // user: {},
+  user: {
+    id: number,
+    name: string,
+  },
   rating: number,
   comment: string,
   date: string,
