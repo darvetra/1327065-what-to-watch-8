@@ -13,7 +13,10 @@ import Tabs from '../tabs/tabs';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
 
-const mapStateToProps = ({movie, similarMovies, comments}: State) => ({
+import {checkAuthorization} from '../../utils';
+
+const mapStateToProps = ({authorizationStatus, movie, similarMovies, comments}: State) => ({
+  authorizationStatus,
   movie,
   similarMovies,
   comments,
@@ -38,8 +41,9 @@ type params = {
   id: string,
 }
 
-function MoviePageScreen({movie, similarMovies, comments, loadMovie, loadSimilarMovies, loadComments}: PropsFromRedux): JSX.Element {
+function MoviePageScreen({authorizationStatus, movie, similarMovies, comments, loadMovie, loadSimilarMovies, loadComments}: PropsFromRedux): JSX.Element {
   const {id}: params = useParams();
+  const isAuth = checkAuthorization(authorizationStatus);
 
   useEffect(() => {
     const movieId = Number(id);
@@ -97,7 +101,13 @@ function MoviePageScreen({movie, similarMovies, comments, loadMovie, loadSimilar
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={AppRoute.AddReview.replace(RouteParams.ID, id)} className="btn film-card__button">Add review</Link>
+                {isAuth &&
+                <Link
+                  to={AppRoute.AddReview.replace(RouteParams.ID, id)}
+                  className="btn film-card__button"
+                >
+                  Add review
+                </Link>}
               </div>
             </div>
           </div>

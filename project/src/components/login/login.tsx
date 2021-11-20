@@ -1,12 +1,21 @@
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 
+import {State} from '../../types/state';
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 
 import {loginAction} from '../../store/api-actions';
 
+import {checkAuthorization} from '../../utils';
+import {AppRoute} from '../../const';
+
+function mapStateToProps({authorizationStatus}: State) {
+  return {
+    authorizationStatus,
+  };
+}
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -14,15 +23,19 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   },
 });
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function LoginScreen(props: PropsFromRedux): JSX.Element {
-  const {onSubmit} = props;
+  const {authorizationStatus, onSubmit} = props;
 
   const mailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  if (checkAuthorization(authorizationStatus)) {
+    return (<Redirect to={AppRoute.Main} />);
+  }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
