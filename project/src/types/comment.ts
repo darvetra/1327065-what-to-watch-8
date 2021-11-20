@@ -51,7 +51,8 @@ export type CommentPost = {
 
 export type CommentTypeAdaptedToServer = Item & CommentPost & {
   user: User,
-  date: string,
+  // date: string,
+  date: Date,
 }
 
 export type CommentType = Omit<CommentTypeAdaptedToServer, 'date'> & {

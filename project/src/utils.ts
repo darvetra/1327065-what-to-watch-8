@@ -1,4 +1,4 @@
-import {SHOW_MOVIE_CARDS, Genres} from './const';
+import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, Genres} from './const';
 import {MoviesType} from './types/movie';
 
 /**
@@ -64,3 +64,10 @@ export const getMovieCardsNumber = (
   currentCount = 0,
   showCards = SHOW_MOVIE_CARDS) : number => Math.min(movieListLength, currentCount + showCards);
 
+/**
+ * проверяет длину комментария
+ * @param text
+ * @param min
+ * @param max
+ */
+export const validateTextLength = (text: string, min = MIN_MESSAGE_LENGTH, max = MAX_MESSAGE_LENGTH): boolean => text.length > min && text.length <= max;

@@ -4,11 +4,9 @@ import {ThunkActionResult} from '../types/action';
 import {AuthData} from '../types/auth-data';
 import {MovieTypeFromServer} from '../types/movie';
 import {UserTypeFromServer} from '../types/user';
-// import {CommentsType, CommentType, CommentTypeAdaptedToServer} from '../types/comment';
-import {CommentsType, CommentType} from '../types/comment';
+import {CommentsType, CommentPost, CommentTypeAdaptedToServer} from '../types/comment';
 
 import {saveToken, dropToken} from '../services/token';
-// import {adaptMovieToClient, adaptUserToClient, adaptCommentToClient} from '../services/adapter';
 import {adaptMovieToClient, adaptUserToClient} from '../services/adapter';
 import {HttpCode} from '../services/api';
 import {initialUser} from './reducer';
@@ -52,9 +50,9 @@ export const fetchComments = (movieId: number): ThunkActionResult =>
     // dispatch(getComments(adaptedData));
   };
 
-export const submitComment = (movieId: number, comment: CommentType): ThunkActionResult =>
+export const submitComment = ({movieId, commentPost}: {commentPost: CommentPost, movieId: number}): ThunkActionResult =>
   async (dispatch, _getState, api) : Promise<void> => {
-    const {data} = await api.post<CommentsType>(APIRoute.FilmComments.replace(RouteParams.FILM_ID, movieId.toString()), comment);
+    const {data} = await api.post<CommentTypeAdaptedToServer[]>(APIRoute.FilmComments.replace(RouteParams.FILM_ID, movieId.toString()), commentPost);
     dispatch(getComments(data));
   };
 

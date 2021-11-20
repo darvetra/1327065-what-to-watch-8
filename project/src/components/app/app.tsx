@@ -51,7 +51,7 @@ function App(props: PropsFromRedux): JSX.Element {
           <MoviePageScreen />
         </Route>
         <Route exact path={AppRoute.AddReview}>
-          <AddReview movie={movie} />
+          <AddReview />
         </Route>
         <Route exact path={AppRoute.Player}>
           <VideoPlayer movie={movie} autoPlay muted />
