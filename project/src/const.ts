@@ -15,6 +15,7 @@ export enum AppRoute {
   Film = '/films/:id',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
+  NotFound = '/404',
 }
 
 export const RouteParams = {
@@ -26,6 +27,11 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export enum ResponseStatusCodes {
+  BadRequest = 400,
+  NotFound = 404,
 }
 
 export enum Genres {
