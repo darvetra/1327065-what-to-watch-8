@@ -12,8 +12,8 @@ export enum AppRoute {
 }
 
 export const RouteParams = {
-  ID: ': id',
-  FILM_ID: ': film_id',
+  ID: ':id',
+  FILM_ID: ':film_id',
 };
 
 export enum AuthorizationStatus {
@@ -37,13 +37,13 @@ export enum Genres {
 
 export enum APIRoute {
   Films = '/films',
-  Film = '/films/: id',
-  SimilarFilms = '/films/: id/similar',
+  Film = '/films/:id',
+  SimilarFilms = '/films/:id/similar',
   Promo = '/promo',
   Favorite = '/favorite',
-  FavoriteStatus = '/favorite/: film_id/: status',
-  FilmComments = ' /comments/: film_id',
-  NewComment = '/comments/: film_id',
+  FavoriteStatus = '/favorite/:film_id/:status',
+  FilmComments = '/comments/:film_id',
+  NewComment = '/comments/:film_id',
   Login = '/login',
   Logout = '/logout',
 }
