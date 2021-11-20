@@ -53,6 +53,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return {...state, movies: action.payload};
     case ActionType.GetMovie:
       return {...state, movie: action.payload};
+    case ActionType.GetComments:
+      return {...state, comments: action.payload};
     case ActionType.GetSimilarMovies:
       return {...state, similarMovies: action.payload};
     case ActionType.RequireAuthorization:

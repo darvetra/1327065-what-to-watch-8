@@ -19,9 +19,9 @@ export const getMovie = (movie: MovieType) => ({
   payload: movie,
 } as const);
 
-export const getComments = (reviews: CommentsType) => ({
+export const getComments = (comments: CommentsType) => ({
   type: ActionType.GetComments,
-  payload: reviews,
+  payload: comments,
 } as const);
 
 export const getSimilarMovies = (movies: MoviesType) => ({
