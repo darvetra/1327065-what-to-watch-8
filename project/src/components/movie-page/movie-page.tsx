@@ -50,7 +50,7 @@ function MoviePageScreen({authorizationStatus, movie, similarMovies, comments, l
     loadMovie(movieId);
     loadSimilarMovies(movieId);
     loadComments(movieId);
-  }, [id]);
+  }, [id, loadMovie]);
 
   if (!movie) {
     return <LoadingScreen />;

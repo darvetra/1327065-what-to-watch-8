@@ -1,6 +1,5 @@
 import {MovieType, MovieTypeFromServer} from '../types/movie';
 import {UserType, UserTypeFromServer} from '../types/user';
-// import {CommentType, CommentTypeAdaptedToServer} from '../types/comment';
 
 export const adaptMovieToClient = (serverMovie: MovieTypeFromServer): MovieType => ({
   id: serverMovie['id'],

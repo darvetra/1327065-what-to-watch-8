@@ -45,7 +45,7 @@ function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFormRedux):JSX
   useEffect(() => {
     const movieId = Number(id);
     loadMovie(movieId);
-  }, [id]);
+  }, [id, loadMovie]);
 
   if (!movie) {
     return <LoadingScreen />;
