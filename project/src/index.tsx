@@ -17,7 +17,7 @@ import {fetchMovies, checkAuthAction} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 
 import App from './components/app/app';
-import {reducer} from './store/reducer';
+import {rootReducer} from './store/root-reducer';
 
 import {promoMovie} from './mocks/promo';
 
@@ -30,7 +30,7 @@ const movie = promoMovie;
 const api = createAPI(() => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)));
 
 const store = createStore(
-  reducer,
+  rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument(api)),
     applyMiddleware(redirect),

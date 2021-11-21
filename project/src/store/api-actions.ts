@@ -9,7 +9,7 @@ import {CommentsType, CommentPost, CommentTypeAdaptedToServer} from '../types/co
 import {saveToken, dropToken} from '../services/token';
 import {adaptMovieToClient, adaptUserToClient} from '../services/adapter';
 import {HttpCode} from '../services/api';
-import {initialUser} from './reducer';
+import {initialUser} from './app-data/app-data';
 
 import {APIRoute, AuthorizationStatus, AppRoute, RouteParams} from '../const';
 
