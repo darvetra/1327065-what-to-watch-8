@@ -22,8 +22,8 @@ type AppScreenProps = {
   movie: MovieType,
 }
 
-const mapStateToProps = ({movies}: State) => ({
-  movies,
+const mapStateToProps = ({DATA}: State) => ({
+  movies: DATA.movies,
 });
 
 const connector = connect(mapStateToProps);

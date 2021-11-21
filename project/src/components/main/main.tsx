@@ -17,14 +17,18 @@ import ShowMore from '../show-more/show-more';
 import {ThunkAppDispatch} from '../../types/action';
 import UserBlock from '../user-block/user-block';
 
+import {getCurrentGenre} from '../../store/movie-process/selectors';
+import {getMovies} from '../../store/app-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+
 type MainScreenProps = {
   promoMovie: MovieType;
 }
 
-const mapStateToProps = ({movies, genre, authorizationStatus}: State) => ({
-  movies,
-  activeGenre: genre,
-  authorizationStatus,
+const mapStateToProps = (state: State) => ({
+  movies: getMovies(state),
+  activeGenre: getCurrentGenre(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 // Без использования bindActionCreators

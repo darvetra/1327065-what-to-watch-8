@@ -1,6 +1,6 @@
 import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, Genres} from './const';
 import {MoviesType} from './types/movie';
-import {AuthorizationStatus} from './const';
+
 
 /**
  * Возвращает время в человеческом формате (в часах и минутах)
@@ -73,8 +73,3 @@ export const getMovieCardsNumber = (
  */
 export const validateTextLength = (text: string, min = MIN_MESSAGE_LENGTH, max = MAX_MESSAGE_LENGTH): boolean => text.length > min && text.length <= max;
 
-/**
- * Проверяет статус авторизации
- * @param authorizationStatus
- */
-export const checkAuthorization = (authorizationStatus: AuthorizationStatus): boolean => authorizationStatus === AuthorizationStatus.Auth;

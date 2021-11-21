@@ -8,14 +8,12 @@ import {AuthData} from '../../types/auth-data';
 
 import {loginAction} from '../../store/api-actions';
 
-import {checkAuthorization} from '../../utils';
 import {AppRoute} from '../../const';
+import {getIsUserAuthorized} from '../../store/user-process/selectors';
 
-function mapStateToProps({authorizationStatus}: State) {
-  return {
-    authorizationStatus,
-  };
-}
+const mapStateToProps = (state: State) => ({
+  isUserAuthorized: getIsUserAuthorized(state),
+});
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
   onSubmit(authData: AuthData) {
@@ -28,12 +26,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function LoginScreen(props: PropsFromRedux): JSX.Element {
-  const {authorizationStatus, onSubmit} = props;
+  const {isUserAuthorized, onSubmit} = props;
 
   const mailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  if (checkAuthorization(authorizationStatus)) {
+  if (isUserAuthorized) {
     return (<Redirect to={AppRoute.Main} />);
   }
 

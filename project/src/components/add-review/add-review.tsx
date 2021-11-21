@@ -15,9 +15,9 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import RatingInputs from './rating-inputs';
 
 
-const mapStateToProps = ({authorizationStatus, movie}: State) => ({
-  authorizationStatus,
-  movie,
+const mapStateToProps = ({USER, MOVIE}: State) => ({
+  authorizationStatus: USER.authorizationStatus,
+  movie: MOVIE.movie,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({

@@ -15,13 +15,14 @@ import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 import {MAX_SIMILAR_MOVIES, RouteParams, AppRoute, ResponseStatusCodes} from '../../const';
-import {checkAuthorization} from '../../utils';
+import {getIsUserAuthorized} from '../../store/user-process/selectors';
+import {getComments, getMovie, getSimilarMovies} from '../../store/movie-process/selectors';
 
-const mapStateToProps = ({authorizationStatus, movie, similarMovies, comments}: State) => ({
-  authorizationStatus,
-  movie,
-  similarMovies,
-  comments,
+const mapStateToProps = (state: State) => ({
+  isUserAuthorized: getIsUserAuthorized(state),
+  movie: getMovie(state),
+  similarMovies: getSimilarMovies(state),
+  comments: getComments(state),
 });
 
 const mapDispatchToProps =(dispatch: Dispatch<Actions>) => ({
@@ -48,9 +49,8 @@ type params = {
   id: string,
 }
 
-function MoviePageScreen({authorizationStatus, movie, similarMovies, comments, loadMovie, loadSimilarMovies, loadComments}: PropsFromRedux): JSX.Element {
+function MoviePageScreen({isUserAuthorized, movie, similarMovies, comments, loadMovie, loadSimilarMovies, loadComments}: PropsFromRedux): JSX.Element {
   const {id}: params = useParams();
-  const isAuth = checkAuthorization(authorizationStatus);
 
   useEffect(() => {
     const movieId = Number(id);
@@ -110,7 +110,7 @@ function MoviePageScreen({authorizationStatus, movie, similarMovies, comments, l
                   </svg>
                   <span>My list</span>
                 </button>
-                {isAuth &&
+                {isUserAuthorized &&
                 <Link
                   to={AppRoute.AddReview.replace(RouteParams.ID, id)}
                   className="btn film-card__button"
