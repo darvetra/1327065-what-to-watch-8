@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore} from '@reduxjs/toolkit';
 
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import {ThunkAppDispatch} from './types/action';
 
 import {createAPI} from './services/api';
 
@@ -57,8 +55,8 @@ const store = configureStore({
     }).concat(redirect),
 });
 
-(store.dispatch as ThunkAppDispatch)(checkAuthAction());
-(store.dispatch as ThunkAppDispatch)(fetchMovies());
+store.dispatch(checkAuthAction());
+store.dispatch(fetchMovies());
 
 ReactDOM.render(
   <React.StrictMode>

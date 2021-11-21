@@ -4,7 +4,6 @@ import {AxiosInstance} from 'axios';
 import {State} from './state';
 import {
   changeGenre,
-  getMovieList,
   getMovie,
   getComments,
   loadMovies,
@@ -17,7 +16,6 @@ import {
 
 export enum ActionType {
   ChangeGenre = 'list/changeGenre',
-  GetMovieList = 'data/getMovieList',
   GetMovie = 'data/getMovie',
   GetComments = 'data/getComments',
   GetSimilarMovies = 'data/getSimilarMovies',
@@ -30,7 +28,6 @@ export enum ActionType {
 
 export type Actions =
   | ReturnType<typeof changeGenre>
-  | ReturnType<typeof getMovieList>
   | ReturnType<typeof getMovie>
   | ReturnType<typeof getComments>
   | ReturnType<typeof getSimilarMovies>
