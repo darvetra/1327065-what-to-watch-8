@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import {configureStore} from "@reduxjs/toolkit";
+
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,19 +22,40 @@ import {promoMovie} from './mocks/promo';
 
 import {redirect} from './store/middlewares/redirect';
 
+
 // моковые данные для превью плеера и добавления ревью
 const movie = promoMovie;
 
 
 const api = createAPI(() => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)));
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-    applyMiddleware(redirect),
-  ),
-);
+
+/**
+ * При работе с Redux приходится писать много шаблонного кода. Редьюсеры,
+ * создатели действий — яркие тому примеры. Redux кажется слишком
+ * многословным и избыточным с точки зрения кода.
+ *
+ * Упростить работу с Redux поможет отдельный пакет Redux Toolkit (RTK).
+ * Это не замена Redux. Это более удобный API и наличие готовой
+ * функциональности, которую рано или поздно пришлось бы написать
+ * самостоятельно. RTK упростит конфигурирование хранилища и избавит от
+ * написания шаблонного кода.
+ *
+ * Внедрять RTK в проект начнём постепенно. Сначала сконфигурируем
+ * хранилище. Для этого воспользуемся функцией `configureStore`.
+ * Обратите внимание, нам больше не требуется дополнительный пакет
+ * `composeWithDevTools`, а также подключение Redux Thunk.
+ * Всё это доступно по умолчанию.
+ */
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect),
+});
 
 (store.dispatch as ThunkAppDispatch)(checkAuthAction());
 (store.dispatch as ThunkAppDispatch)(fetchMovies());
