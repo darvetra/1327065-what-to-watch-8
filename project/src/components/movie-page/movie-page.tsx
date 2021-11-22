@@ -1,10 +1,11 @@
-import {Fragment, useEffect, Dispatch} from 'react';
+import {Fragment, useEffect} from 'react';
+import {Dispatch} from '@reduxjs/toolkit';
 import {Link, useParams} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
 import {AxiosError} from 'axios';
 
 import {State} from '../../types/state';
-import {ThunkAppDispatch, Actions} from '../../types/action';
+import {ThunkAppDispatch} from '../../types/action';
 
 import {fetchMovie, fetchComments, fetchSimilarMovies} from '../../store/api-actions';
 import browserHistory from '../../browser-history';
@@ -25,7 +26,7 @@ const mapStateToProps = (state: State) => ({
   comments: getComments(state),
 });
 
-const mapDispatchToProps =(dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps =(dispatch: Dispatch) => ({
   loadMovie(movieId: number) {
     return (dispatch as ThunkAppDispatch)(fetchMovie(movieId))
       .catch((error: AxiosError) => {

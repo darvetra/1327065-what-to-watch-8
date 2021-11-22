@@ -1,6 +1,7 @@
 import {Link, Redirect} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
+import {Dispatch} from '@reduxjs/toolkit';
 
 import {State} from '../../types/state';
 import {ThunkAppDispatch} from '../../types/action';
@@ -15,9 +16,9 @@ const mapStateToProps = (state: State) => ({
   isUserAuthorized: getIsUserAuthorized(state),
 });
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit(authData: AuthData) {
-    dispatch(loginAction(authData));
+    (dispatch as ThunkAppDispatch)(loginAction(authData));
   },
 });
 

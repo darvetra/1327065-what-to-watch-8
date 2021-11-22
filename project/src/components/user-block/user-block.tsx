@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
+import {Dispatch} from '@reduxjs/toolkit';
 
 import {ThunkAppDispatch} from '../../types/action';
 import {State} from '../../types/state';
@@ -13,9 +14,9 @@ const mapStateToProps = (state: State) => ({
   isUserAuthorized: getIsUserAuthorized(state),
 });
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onLogout() {
-    dispatch(logoutAction());
+    (dispatch as ThunkAppDispatch)(logoutAction());
   },
 });
 

@@ -1,9 +1,10 @@
-import {Dispatch, FormEvent, useEffect, useCallback} from 'react';
+import {FormEvent, useEffect, useCallback} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
+import {Dispatch} from '@reduxjs/toolkit';
 
 import {State} from '../../types/state';
-import {ThunkAppDispatch, Actions} from '../../types/action';
+import {ThunkAppDispatch} from '../../types/action';
 import {CommentPost} from '../../types/comment';
 import {UrlParams} from '../../types/url-params';
 
@@ -14,13 +15,14 @@ import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
 import RatingInputs from './rating-inputs';
 
+import {getMovie} from '../../store/movie-process/selectors';
 
-const mapStateToProps = ({USER, MOVIE}: State) => ({
-  authorizationStatus: USER.authorizationStatus,
-  movie: MOVIE.movie,
+
+const mapStateToProps = (state: State) => ({
+  movie: getMovie(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   commentSubmitHandler(submitData: {movieId: number, commentPost: CommentPost}) {
     return (dispatch as ThunkAppDispatch)(submitComment(submitData));
   },
@@ -31,9 +33,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
 
 const connected = connect(mapStateToProps, mapDispatchToProps);
 
-type PropsFormRedux = ConnectedProps<typeof connected>;
+type PropsFromRedux = ConnectedProps<typeof connected>;
 
-function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFormRedux):JSX.Element {
+function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFromRedux):JSX.Element {
   const {id}: UrlParams = useParams();
   const [
     isFormSubmit,
