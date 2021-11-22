@@ -9,7 +9,7 @@ import {CommentsType, CommentPost, CommentTypeAdaptedToServer} from '../types/co
 import {saveToken, dropToken} from '../services/token';
 import {adaptMovieToClient, adaptUserToClient} from '../services/adapter';
 import {HttpCode} from '../services/api';
-import {initialUser} from './app-data/app-data';
+import {initialUser} from '../const';
 
 import {APIRoute, AuthorizationStatus, AppRoute, RouteParams} from '../const';
 
@@ -21,7 +21,8 @@ import {
   authUser,
   getMovie,
   getSimilarMovies,
-  getComments
+  getComments,
+  loadPromoMovie
 } from './action';
 
 
@@ -33,6 +34,13 @@ export const fetchMovies = (): ThunkActionResult =>
     const {data: serverMovies} = await api.get(APIRoute.Films);
     const moviesData = serverMovies.map((serverMovie: MovieTypeFromServer) => adaptMovieToClient(serverMovie));
     dispatch(loadMovies(moviesData));
+  };
+
+export const fetchPromoMovie = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<MovieTypeFromServer>(APIRoute.Promo);
+    const adaptedData = adaptMovieToClient(data);
+    dispatch(loadPromoMovie(adaptedData));
   };
 
 export const fetchMovie = (movieId: number): ThunkActionResult =>

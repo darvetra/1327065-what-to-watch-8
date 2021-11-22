@@ -7,6 +7,7 @@ import {RootState} from '../store/root-reducer';
 
 export type AppData = {
   movies: MoviesType,
+  promoMovie: MovieType,
   user: UserType,
 }
 

@@ -1,5 +1,6 @@
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
+import browserHistory from '../../browser-history';
 
 import {State} from '../../types/state';
 import {MovieType} from '../../types/movie';
@@ -15,15 +16,14 @@ import VideoPlayer from '../video-player/video-player';
 import NotFoundScreen from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
-import browserHistory from '../../browser-history';
+import {getMovies} from '../../store/app-data/selectors';
 
 type AppScreenProps = {
-  promoMovie: MovieType,
   movie: MovieType,
 }
 
-const mapStateToProps = ({DATA}: State) => ({
-  movies: DATA.movies,
+const mapStateToProps = (state: State) => ({
+  movies: getMovies(state),
 });
 
 const connector = connect(mapStateToProps);
@@ -31,13 +31,13 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector> & AppScreenProps;
 
 function App(props: PropsFromRedux): JSX.Element {
-  const {promoMovie, movies, movie} = props;
+  const {movies, movie} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainScreen promoMovie={promoMovie} />
+          <MainScreen />
         </Route>
         <Route exact path={AppRoute.SignIn}>
           <LoginScreen />

@@ -59,3 +59,31 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const initialMovie = {
+  id: 0,
+  name: '',
+  posterImage: '',
+  previewImage: '',
+  backgroundImage: '',
+  backgroundColor: '',
+  videoLink: '',
+  previewVideoLink: '',
+  description: '',
+  rating: 0,
+  scoresCount: 0,
+  director: '',
+  starring: [],
+  runTime: 0,
+  genre: '',
+  released: 0,
+  isFavorite: false,
+};
+
+export const initialUser = {
+  id: 0,
+  email: '',
+  name: '',
+  avatarUrl: '',
+  token: '',
+};

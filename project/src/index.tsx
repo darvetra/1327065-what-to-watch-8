@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {createAPI} from './services/api';
 
 import {requireAuthorization} from './store/action';
-import {fetchMovies, checkAuthAction} from './store/api-actions';
+import {fetchMovies, checkAuthAction, fetchPromoMovie} from './store/api-actions';
 
 import {AuthorizationStatus} from './const';
 
@@ -57,12 +57,13 @@ const store = configureStore({
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchMovies());
+store.dispatch(fetchPromoMovie());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ToastContainer />
-      <App promoMovie={promoMovie} movie={movie} />
+      <App movie={movie} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

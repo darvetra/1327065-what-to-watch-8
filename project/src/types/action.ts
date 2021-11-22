@@ -8,6 +8,7 @@ import {State} from './state';
 
 export enum ActionType {
   ChangeGenre = 'movie/changeGenre',
+  LoadPromoMovie = 'data/loadPromoMovie',
   GetMovie = 'movie/getMovie',
   GetComments = 'movie/getComments',
   GetSimilarMovies = 'movie/getSimilarMovies',

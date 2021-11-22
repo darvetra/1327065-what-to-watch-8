@@ -12,6 +12,13 @@ export const changeGenre = createAction(
   }),
 );
 
+export const loadPromoMovie = createAction(
+  ActionType.LoadPromoMovie,
+  (movie: MovieType) => ({
+    payload: movie,
+  }),
+);
+
 export const getMovie = createAction(
   ActionType.GetMovie,
   (movie: MovieType) => ({

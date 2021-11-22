@@ -60,7 +60,7 @@ function MoviePageScreen({isUserAuthorized, movie, similarMovies, comments, load
         loadSimilarMovies(movieId);
         loadComments(movieId);
       });
-  }, [id, loadMovie]);
+  }, [id, loadMovie, loadSimilarMovies, loadComments]);
 
   if (!movie) {
     return <LoadingScreen />;
