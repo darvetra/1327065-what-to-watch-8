@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {AxiosError} from 'axios';
-import {toast} from 'react-toastify';
 
 import browserHistory from '../browser-history';
 import {validateTextLength} from '../utils';
@@ -8,8 +7,6 @@ import {AppRoute, ResponseStatusCodes, RouteParams, RATING_DEFAULT} from '../con
 
 import {CommentPost} from '../types/comment';
 
-
-const REVIEW_FAIL_MESSAGE = 'Комментарий не может быть пустым';
 
 type Rating = string;
 type Review = string;
@@ -58,9 +55,6 @@ function useUserReview(onSubmit: (submitData: SubmitData) => Promise<void>): Res
       })
       .catch((error: AxiosError) => {
         if (error.response?.status === ResponseStatusCodes.BadRequest) {
-          toast.info(REVIEW_FAIL_MESSAGE, {
-            position: 'top-center',
-          });
           setIsFormSubmit(false);
         }
       });
