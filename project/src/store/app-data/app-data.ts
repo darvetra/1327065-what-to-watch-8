@@ -1,5 +1,8 @@
+import {createReducer} from '@reduxjs/toolkit';
+
 import {AppData} from '../../types/state';
-import {Actions, ActionType} from '../../types/action';
+
+import {loadMovies, authUser} from '../action';
 
 
 export const initialUser = {
@@ -15,15 +18,14 @@ const initialState: AppData = {
   user: initialUser,
 };
 
-const appData = (state = initialState, action: Actions): AppData => {
-  switch (action.type) {
-    case ActionType.LoadMovies:
-      return {...state, movies: action.payload};
-    case ActionType.AuthUser:
-      return {...state, user: action.payload};
-    default:
-      return state;
-  }
-};
+const appData = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadMovies, (state, action) => {
+      state.movies = action.payload;
+    })
+    .addCase(authUser, (state, action) => {
+      state.user = action.payload;
+    });
+});
 
 export {appData};
