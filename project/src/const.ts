@@ -34,18 +34,8 @@ export enum ResponseStatusCodes {
   NotFound = 404,
 }
 
-export enum Genres {
-  All = 'All genres',
-  Comedies = 'Comedies',
-  Crime = 'Crime',
-  Documentary = 'Documentary',
-  Dramas = 'Dramas',
-  Horror = 'Horror',
-  KidsAndFamily = 'Kids & Family',
-  Romance = 'Romance',
-  SciFi = 'Sci-Fi',
-  Thrillers = 'Thrillers',
-}
+export const ALL_GENRES = 'All genres';
+export const ACTIVE_GENRE_CLASS_NAME = 'catalog__genres-item--active';
 
 export enum APIRoute {
   Films = '/films',
@@ -59,3 +49,31 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const initialMovie = {
+  id: 0,
+  name: '',
+  posterImage: '',
+  previewImage: '',
+  backgroundImage: '',
+  backgroundColor: '',
+  videoLink: '',
+  previewVideoLink: '',
+  description: '',
+  rating: 0,
+  scoresCount: 0,
+  director: '',
+  starring: [],
+  runTime: 0,
+  genre: '',
+  released: 0,
+  isFavorite: false,
+};
+
+export const initialUser = {
+  id: 0,
+  email: '',
+  name: '',
+  avatarUrl: '',
+  token: '',
+};

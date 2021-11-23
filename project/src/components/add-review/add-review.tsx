@@ -1,28 +1,28 @@
-import {Dispatch, FormEvent, ChangeEvent, useEffect, useState} from 'react';
+import {FormEvent, useEffect, useCallback} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
+import {Dispatch} from '@reduxjs/toolkit';
 
 import {State} from '../../types/state';
-import {ThunkAppDispatch, Actions} from '../../types/action';
+import {ThunkAppDispatch} from '../../types/action';
 import {CommentPost} from '../../types/comment';
 import {UrlParams} from '../../types/url-params';
 
-import {validateTextLength} from '../../utils';
-
 import {fetchMovie, submitComment} from '../../store/api-actions';
+import {useUserReview} from '../../hooks/use-user-review';
 
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
-import RatingInput from '../rating-input/rating-input';
+import RatingInputs from './rating-inputs';
 
-import {RATING_DEFAULT, RATING_MIN, RATING_MAX} from '../../const';
+import {getMovie} from '../../store/movie-process/selectors';
 
-const mapStateToProps = ({authorizationStatus, movie}: State) => ({
-  authorizationStatus,
-  movie,
+
+const mapStateToProps = (state: State) => ({
+  movie: getMovie(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   commentSubmitHandler(submitData: {movieId: number, commentPost: CommentPost}) {
     return (dispatch as ThunkAppDispatch)(submitComment(submitData));
   },
@@ -33,19 +33,28 @@ const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
 
 const connected = connect(mapStateToProps, mapDispatchToProps);
 
-type PropsFormRedux = ConnectedProps<typeof connected>;
+type PropsFromRedux = ConnectedProps<typeof connected>;
 
-function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFormRedux):JSX.Element {
+function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFromRedux):JSX.Element {
   const {id}: UrlParams = useParams();
-  const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(RATING_DEFAULT);
-  const [isCommentValid, setIsCommentValid] = useState(false);
-  const [isFormSubmit, setIsFormSubmit] = useState(false);
+  const [
+    isFormSubmit,
+    isCommentValid,
+    comment,
+    rating,
+    handleRatingChange,
+    handleCommentChange,
+    handleSubmitChange,
+  ] = useUserReview(commentSubmitHandler);
 
   useEffect(() => {
     const movieId = Number(id);
     loadMovie(movieId);
   }, [id, loadMovie]);
+
+  const onChangeRating = useCallback((ratingUpdate) => {
+    handleRatingChange(ratingUpdate);
+  }, [handleRatingChange]);
 
   if (!movie) {
     return <LoadingScreen />;
@@ -53,55 +62,12 @@ function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFormRedux):JSX
 
   const {id: movieId, name, posterImage, backgroundImage} = movie;
 
-  function createRatingInputs() {
-    const ratings = [];
-    for (let i = RATING_MAX; i >= RATING_MIN; i--) {
-      ratings.push((
-        <RatingInput
-          ratingValue={`${i}`}
-          changeRating={onChangeRating}
-          key={`rating${i}`}
-          checked={rating === `${i}`}
-          disabled={isFormSubmit}
-        />
-      ));
-    }
-    return ratings;
-  }
-
-  function onChangeRating(e: ChangeEvent<HTMLInputElement>) {
-    setRating(e.target.value);
-  }
-
-  function onChangeReview(e: ChangeEvent<HTMLTextAreaElement>) {
-    const text = e.target.value;
-    setComment(text);
-    setIsCommentValid(validateTextLength(text.trim()));
-  }
-
   function onReviewSubmit(e: FormEvent) {
     e.preventDefault();
-    if (isFormSubmit) {
+    if (isFormSubmit || !isCommentValid) {
       return;
     }
-    if (!isCommentValid) {
-      return;
-    }
-
-    setIsFormSubmit(true);
-    commentSubmitHandler({
-      movieId,
-      commentPost: {
-        rating: Number(rating),
-        comment: comment.trim(),
-      },
-    })
-      .then(() => {
-        setComment('');
-        setRating(RATING_DEFAULT);
-        setIsCommentValid(false);
-        setIsFormSubmit(false);
-      });
+    handleSubmitChange(movieId);
   }
 
   return (
@@ -149,14 +115,18 @@ function AddReview({movie, loadMovie, commentSubmitHandler}: PropsFormRedux):JSX
         >
           <div className="rating">
             <div className="rating__stars">
-              {createRatingInputs()}
+              <RatingInputs
+                currentRating={rating}
+                isDisabled={isFormSubmit}
+                onChangeRating={onChangeRating}
+              />
             </div>
           </div>
 
           <div className="add-review__text">
             <textarea
               value={comment}
-              onChange={onChangeReview}
+              onChange={(e) => handleCommentChange(e.target.value)}
               className="add-review__textarea"
               name="review-text"
               id="review-text"

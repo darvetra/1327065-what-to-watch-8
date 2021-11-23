@@ -1,54 +1,71 @@
+import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
 import {MoviesType, MovieType} from '../types/movie';
-import {AppRoute, AuthorizationStatus, Genres} from '../const';
+import {AppRoute, AuthorizationStatus} from '../const';
 import {UserType} from '../types/user';
 import {CommentsType} from '../types/comment';
 
-export const changeGenre = (genre: Genres) => ({
-  type: ActionType.ChangeGenre,
-  payload: genre,
-} as const);
+export const changeGenre = createAction(
+  ActionType.ChangeGenre,
+  (genre: string) => ({
+    payload: genre,
+  }),
+);
 
-export const getMovieList = (movies: MoviesType) => ({
-  type: ActionType.GetMovieList,
-  payload: movies,
-} as const);
+export const loadPromoMovie = createAction(
+  ActionType.LoadPromoMovie,
+  (movie: MovieType) => ({
+    payload: movie,
+  }),
+);
 
-export const getMovie = (movie: MovieType) => ({
-  type: ActionType.GetMovie,
-  payload: movie,
-} as const);
+export const getMovie = createAction(
+  ActionType.GetMovie,
+  (movie: MovieType) => ({
+    payload: movie,
+  }),
+);
 
-export const getComments = (comments: CommentsType) => ({
-  type: ActionType.GetComments,
-  payload: comments,
-} as const);
+export const getComments = createAction(
+  ActionType.GetComments,
+  (comments: CommentsType) => ({
+    payload: comments,
+  }),
+);
 
-export const getSimilarMovies = (movies: MoviesType) => ({
-  type: ActionType.GetSimilarMovies,
-  payload: movies,
-} as const);
+export const getSimilarMovies = createAction(
+  ActionType.GetSimilarMovies,
+  (movies: MoviesType) => ({
+    payload: movies,
+  }),
+);
 
-export const loadMovies = (movies: MoviesType) => ({
-  type: ActionType.LoadMovies,
-  payload: movies,
-} as const);
+export const loadMovies = createAction(
+  ActionType.LoadMovies,
+  (movies: MoviesType) => ({
+    payload: movies,
+  }),
+);
 
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
-  type: ActionType.RequireAuthorization,
-  payload: authStatus,
-} as const);
+export const requireAuthorization = createAction(
+  ActionType.RequireAuthorization,
+  (authStatus: AuthorizationStatus) => ({
+    payload: authStatus,
+  }),
+);
 
-export const requireLogout = () => ({
-  type: ActionType.RequireLogout,
-} as const);
+export const requireLogout = createAction(ActionType.RequireLogout);
 
-export const authUser = (user: UserType) => ({
-  type: ActionType.AuthUser,
-  payload: user,
-} as const);
+export const authUser = createAction(
+  ActionType.AuthUser,
+  (user: UserType) => ({
+    payload: user,
+  }),
+);
 
-export const redirectToRoute = (url: AppRoute) => ({
-  type: ActionType.RedirectToRoute,
-  payload: url,
-} as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute) => ({
+    payload: url,
+  }),
+);

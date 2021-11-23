@@ -1,35 +1,35 @@
 import {Fragment, useCallback, useEffect, useState} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
+import {connect, ConnectedProps, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {Dispatch} from '@reduxjs/toolkit';
 
 import {changeGenre} from '../../store/action';
 
 import {State} from '../../types/state';
-import {MovieType} from '../../types/movie';
 
-import {Genres} from '../../const';
 import {getFilterMoviesByGenre, getMovieCardsNumber} from '../../utils';
 
 import GenresList from '../genres-list/genres-list';
 import MovieList from '../movie-list/movie-list';
 import ShowMore from '../show-more/show-more';
 
-import {ThunkAppDispatch} from '../../types/action';
 import UserBlock from '../user-block/user-block';
 
-type MainScreenProps = {
-  promoMovie: MovieType;
-}
+import {getCurrentGenre} from '../../store/movie-process/selectors';
+import {getMovies} from '../../store/app-data/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {getPromoMovie} from '../../store/app-data/selectors';
 
-const mapStateToProps = ({movies, genre, authorizationStatus}: State) => ({
-  movies,
-  activeGenre: genre,
-  authorizationStatus,
+
+const mapStateToProps = (state: State) => ({
+  movies: getMovies(state),
+  activeGenre: getCurrentGenre(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 // Без использования bindActionCreators
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  onChangeGenre(genre: Genres) {
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onChangeGenre(genre: string) {
     dispatch(changeGenre(genre));
   },
 });
@@ -37,12 +37,13 @@ const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
+  const {movies, activeGenre} = props;
 
-  const {promoMovie, movies, activeGenre, onChangeGenre} = props;
-  const genres = Object.values(Genres) as Genres[];
+  const promoMovie = useSelector(getPromoMovie);
+  const {name, genre, released, posterImage, backgroundImage} = promoMovie;
 
   const [filteredMovies, setFilteredMovies] = useState(getFilterMoviesByGenre(movies, activeGenre));
   const [showMoviesNumber, setShowMoviesNumber] = useState(getMovieCardsNumber(filteredMovies.length));
@@ -64,15 +65,11 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
     setShowMoviesNumber((moviesNumber) => getMovieCardsNumber(filteredMovies.length, moviesNumber));
   }, [filteredMovies.length]);
 
-  const genreChangeHandler = useCallback((genre) => {
-    onChangeGenre(genre);
-  }, [onChangeGenre]);
-
   return (
     <Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoMovie.backgroundImage} alt={promoMovie.name}/>
+          <img src={backgroundImage} alt={name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -92,14 +89,14 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoMovie.posterImage} alt={promoMovie.name} width="218" height="327"/>
+              <img src={posterImage} alt={name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoMovie.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoMovie.genre}</span>
-                <span className="film-card__year">{promoMovie.released}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -124,11 +121,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList
-            genres={genres}
-            activeGenre={activeGenre}
-            onChangeGenre={genreChangeHandler}
-          />
+          <GenresList />
 
           <MovieList
             movies={filteredMovies.slice(0, showMoviesNumber)}
