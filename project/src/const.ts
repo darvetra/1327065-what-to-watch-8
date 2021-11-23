@@ -34,18 +34,8 @@ export enum ResponseStatusCodes {
   NotFound = 404,
 }
 
-export enum Genres {
-  All = 'All genres',
-  Comedies = 'Comedies',
-  Crime = 'Crime',
-  Documentary = 'Documentary',
-  Dramas = 'Dramas',
-  Horror = 'Horror',
-  KidsAndFamily = 'Kids & Family',
-  Romance = 'Romance',
-  SciFi = 'Sci-Fi',
-  Thrillers = 'Thrillers',
-}
+export const ALL_GENRES = 'All genres';
+export const ACTIVE_GENRE_CLASS_NAME = 'catalog__genres-item--active';
 
 export enum APIRoute {
   Films = '/films',

@@ -1,5 +1,5 @@
 import {MoviesType, MovieType} from './movie';
-import {Genres, AuthorizationStatus} from '../const';
+import {AuthorizationStatus} from '../const';
 import {UserType} from './user';
 import {CommentsType} from './comment';
 import {RootState} from '../store/root-reducer';
@@ -12,7 +12,7 @@ export type AppData = {
 }
 
 export type MovieProcess = {
-  genre: Genres,
+  currentGenre: string,
   movie: MovieType | null,
   comments: CommentsType,
   similarMovies: MoviesType,

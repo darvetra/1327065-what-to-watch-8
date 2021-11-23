@@ -1,13 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import {Genres} from '../../const';
+import {ALL_GENRES} from '../../const';
 import {MovieProcess} from '../../types/state';
 
 import {changeGenre, getMovie, getSimilarMovies, getComments} from '../action';
 
 
 const initialState: MovieProcess = {
-  genre: Genres.All,
+  currentGenre: ALL_GENRES,
   movie: null,
   comments: [],
   similarMovies: [],
@@ -16,7 +16,7 @@ const initialState: MovieProcess = {
 const movieProcess = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
-      state.genre = action.payload;
+      state.currentGenre = action.payload;
     })
     .addCase(getMovie, (state, action) => {
       state.movie = action.payload;

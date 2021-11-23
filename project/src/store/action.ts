@@ -1,13 +1,13 @@
 import {createAction} from '@reduxjs/toolkit';
 import {ActionType} from '../types/action';
 import {MoviesType, MovieType} from '../types/movie';
-import {AppRoute, AuthorizationStatus, Genres} from '../const';
+import {AppRoute, AuthorizationStatus} from '../const';
 import {UserType} from '../types/user';
 import {CommentsType} from '../types/comment';
 
 export const changeGenre = createAction(
   ActionType.ChangeGenre,
-  (genre: Genres) => ({
+  (genre: string) => ({
     payload: genre,
   }),
 );

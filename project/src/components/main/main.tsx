@@ -7,7 +7,6 @@ import {changeGenre} from '../../store/action';
 
 import {State} from '../../types/state';
 
-import {Genres} from '../../const';
 import {getFilterMoviesByGenre, getMovieCardsNumber} from '../../utils';
 
 import GenresList from '../genres-list/genres-list';
@@ -30,7 +29,7 @@ const mapStateToProps = (state: State) => ({
 
 // Без использования bindActionCreators
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onChangeGenre(genre: Genres) {
+  onChangeGenre(genre: string) {
     dispatch(changeGenre(genre));
   },
 });
@@ -41,12 +40,10 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
-  const {movies, activeGenre, onChangeGenre} = props;
+  const {movies, activeGenre} = props;
 
   const promoMovie = useSelector(getPromoMovie);
   const {name, genre, released, posterImage, backgroundImage} = promoMovie;
-
-  const genres = Object.values(Genres) as Genres[];
 
   const [filteredMovies, setFilteredMovies] = useState(getFilterMoviesByGenre(movies, activeGenre));
   const [showMoviesNumber, setShowMoviesNumber] = useState(getMovieCardsNumber(filteredMovies.length));
@@ -67,10 +64,6 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   const onShowMore = useCallback(() => {
     setShowMoviesNumber((moviesNumber) => getMovieCardsNumber(filteredMovies.length, moviesNumber));
   }, [filteredMovies.length]);
-
-  const genreChangeHandler = useCallback((genreInList) => {
-    onChangeGenre(genreInList);
-  }, [onChangeGenre]);
 
   return (
     <Fragment>
@@ -128,11 +121,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList
-            genres={genres}
-            activeGenre={activeGenre}
-            onChangeGenre={genreChangeHandler}
-          />
+          <GenresList />
 
           <MovieList
             movies={filteredMovies.slice(0, showMoviesNumber)}

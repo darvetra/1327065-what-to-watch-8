@@ -1,4 +1,4 @@
-import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, Genres} from './const';
+import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, ALL_GENRES} from './const';
 import {MoviesType} from './types/movie';
 
 
@@ -47,7 +47,7 @@ export const getRating = (rating: number) : string => {
  * @param genre
  */
 export const getFilterMoviesByGenre = (movies: MoviesType, genre: string) : MoviesType => {
-  if (genre === Genres.All) {
+  if (genre === ALL_GENRES) {
     return movies;
   }
 
