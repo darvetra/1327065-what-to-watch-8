@@ -8,7 +8,6 @@ import {RootState} from '../store/root-reducer';
 export type AppData = {
   movies: MoviesType,
   promoMovie: MovieType,
-  user: UserType,
 }
 
 export type MovieProcess = {
@@ -20,6 +19,7 @@ export type MovieProcess = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus,
+  user: UserType,
 }
 
 export type State = RootState;

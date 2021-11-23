@@ -1,46 +1,39 @@
 import {Link} from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
-import {Dispatch} from '@reduxjs/toolkit';
-
-import {ThunkAppDispatch} from '../../types/action';
-import {State} from '../../types/state';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {AppRoute} from '../../const';
 
 import {logoutAction} from '../../store/api-actions';
 import {getIsUserAuthorized} from '../../store/user-process/selectors';
+import {getUser} from '../../store/user-process/selectors';
 
-const mapStateToProps = (state: State) => ({
-  isUserAuthorized: getIsUserAuthorized(state),
-});
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onLogout() {
-    (dispatch as ThunkAppDispatch)(logoutAction());
-  },
-});
+function UserBlock(): JSX.Element {
+  const authorizationStatus = useSelector(getIsUserAuthorized);
+  const user = useSelector(getUser);
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+  const dispatch = useDispatch();
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function UserBlock(props: PropsFromRedux): JSX.Element {
-  const {isUserAuthorized, onLogout} = props;
+  const onLogout = () => {
+    dispatch(logoutAction());
+  };
 
   return (
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img
-            src="img/avatar.jpg"
-            alt="User avatar"
-            width="63"
-            height="63"
-          />
+          <Link to={AppRoute.MyList}>
+            <img
+              src={user.avatarUrl === '' ? 'img/avatar.jpg' : user.avatarUrl}
+              alt={user.name}
+              width="63"
+              height="63"
+            />
+          </Link>
         </div>
       </li>
       <li className="user-block__item">
-        {isUserAuthorized ?
+        {authorizationStatus ?
           <Link
             to='/'
             className="user-block__link"
@@ -54,5 +47,4 @@ function UserBlock(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {UserBlock};
-export default connector(UserBlock);
+export default UserBlock;
