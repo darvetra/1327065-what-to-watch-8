@@ -1,6 +1,7 @@
 import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, ALL_GENRES} from './const';
 import {MoviesType} from './types/movie';
-
+import {APIRoute, AppRoute} from './const';
+import {RouteParamsValues} from './types/url-params';
 
 /**
  * Возвращает время в человеческом формате (в часах и минутах)
@@ -73,3 +74,15 @@ export const getMovieCardsNumber = (
  */
 export const validateTextLength = (text: string, min = MIN_MESSAGE_LENGTH, max = MAX_MESSAGE_LENGTH): boolean => text.length > min && text.length <= max;
 
+/**
+ * Заменяет параметры ссылки переданным значением
+ * @param route
+ * @param param
+ * @param replace
+ */
+export const replaceRouteParams = (route: APIRoute | AppRoute, param: RouteParamsValues, replace: string | number): string => {
+  if (typeof replace  === 'number') {
+    replace = replace.toString();
+  }
+  return route.replace(param, replace);
+};

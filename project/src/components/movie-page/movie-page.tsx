@@ -14,8 +14,11 @@ import MovieList from '../movie-list/movie-list';
 import Tabs from '../tabs/tabs';
 import UserBlock from '../user-block/user-block';
 import LoadingScreen from '../loading-screen/loading-screen';
+import ButtonPlay from '../button-play/button-play';
+import ButtonList from '../button-list/button-list';
 
 import {MAX_SIMILAR_MOVIES, RouteParams, AppRoute, ResponseStatusCodes} from '../../const';
+import {replaceRouteParams} from '../../utils';
 import {getIsUserAuthorized} from '../../store/user-process/selectors';
 import {getComments, getMovie, getSimilarMovies} from '../../store/movie-process/selectors';
 
@@ -68,6 +71,8 @@ function MoviePageScreen({isUserAuthorized, movie, similarMovies, comments, load
 
   const {backgroundImage, genre, name, released, posterImage} = movie;
 
+  const onPlayClick = () => browserHistory.push(replaceRouteParams(AppRoute.Player, RouteParams.ID, id));
+
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -99,25 +104,17 @@ function MoviePageScreen({isUserAuthorized, movie, similarMovies, comments, load
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <ButtonPlay onPlayClick={onPlayClick} />
                 {isUserAuthorized &&
-                <Link
-                  to={AppRoute.AddReview.replace(RouteParams.ID, id)}
-                  className="btn film-card__button"
-                >
-                  Add review
-                </Link>}
+                  <Fragment>
+                    <ButtonList />
+                    <Link
+                      to={AppRoute.AddReview.replace(RouteParams.ID, id)}
+                      className="btn film-card__button"
+                    >
+                      Add review
+                    </Link>
+                  </Fragment>}
               </div>
             </div>
           </div>
