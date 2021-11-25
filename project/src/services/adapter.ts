@@ -35,8 +35,3 @@ export function adaptUserToClient(user: UserTypeFromServer) {
   return <UserType>adaptedUser;
 }
 
-// export function adaptCommentToClient(data: CommentTypeAdaptedToServer): CommentType {
-//   return Object.assign({}, data, {
-//     date: new Date(data.date),
-//   });
-// }

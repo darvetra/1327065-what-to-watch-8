@@ -6,7 +6,6 @@ export const MAX_MESSAGE_LENGTH = 400;
 
 export const RATING_DEFAULT = '8';
 export const RATING_MAX = 10;
-export const RATING_MIN = 1;
 
 export enum AppRoute {
   Main = '/',

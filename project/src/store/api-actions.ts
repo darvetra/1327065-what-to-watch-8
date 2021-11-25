@@ -54,8 +54,6 @@ export const fetchComments = (movieId: number): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<CommentsType>(APIRoute.FilmComments.replace(RouteParams.FILM_ID, movieId.toString()));
     dispatch(getComments(data));
-    // const adaptedData = data.map((comment) => adaptCommentToClient(comment));
-    // dispatch(getComments(adaptedData));
   };
 
 export const submitComment = ({movieId, commentPost}: {commentPost: CommentPost, movieId: number}): ThunkActionResult =>
