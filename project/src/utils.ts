@@ -1,4 +1,4 @@
-import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, ALL_GENRES} from './const';
+import {SHOW_MOVIE_CARDS, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH, ALL_GENRES, TextRating} from './const';
 import {MoviesType} from './types/movie';
 import {APIRoute, AppRoute} from './const';
 import {RouteParamsValues} from './types/url-params';
@@ -19,23 +19,23 @@ export const getRunTime = (timeInMinutes : number) : string => {
  * @param rating
  */
 export const getRating = (rating: number) : string => {
-  if (rating > 0 && rating < 3) {
+  if (rating > TextRating.Zero && rating < TextRating.Bad) {
     return 'Bad';
   }
 
-  if (rating >= 3 && rating < 5) {
+  if (rating >= TextRating.Bad && rating < TextRating.Normal) {
     return 'Normal';
   }
 
-  if (rating >= 5 && rating < 8) {
+  if (rating >= TextRating.Normal && rating < TextRating.Good) {
     return 'Good';
   }
 
-  if (rating >= 8 && rating < 10) {
+  if (rating >= TextRating.Good && rating < TextRating.Awesome) {
     return 'Very good';
   }
 
-  if (rating === 10) {
+  if (rating === TextRating.Awesome) {
     return 'Awesome';
   }
 

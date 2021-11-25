@@ -7,6 +7,14 @@ export const MAX_MESSAGE_LENGTH = 400;
 export const RATING_DEFAULT = '8';
 export const RATING_MAX = 10;
 
+export enum TextRating {
+  Zero = 0,
+  Bad = 3,
+  Normal = 5,
+  Good = 8,
+  Awesome = 10,
+}
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
